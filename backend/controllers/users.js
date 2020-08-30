@@ -29,6 +29,7 @@ usersRouter.post('/', async (req, res, next) => {
   
 })
 
+//lisää try-catch -->
 usersRouter.get('/', async (req, res) => {
   const users = await User.find({})
   res.json(users.map(user => user.toJSON()))
