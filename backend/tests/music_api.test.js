@@ -116,6 +116,53 @@ describe('while there is a user in the database', () => {
     expect(usersAtEnd).toHaveLength(usersAtStart.length)
   })
 
+  test('logging in returns a token with the required fields', async () => {
+    const userForLogin = {
+      username: 'tester',
+      password: 'secret_password'
+    }
+
+    const result = await api
+      .post('/api/login')
+      .send(userForLogin)
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+
+    if (!(result.body.token && result.body.username && result.body.name)) {
+      throw new Error('all fields are not present')
+    }
+  })
+
+  test('attempt to log in with a nonexisting user will be rejected with the proper error message', async () => {
+    const userForLogin = {
+      username: 'whoIsThis',
+      password: 'pwpwpwpwpwpw'
+    }
+
+    const result = await api
+      .post('/api/login')
+      .send(userForLogin)
+      .expect(401)
+      .expect('Content-Type', /application\/json/)
+
+    expect(result.body.error).toContain('invalid username or password')
+  })
+
+  test('attempt to log in with an invalid password will be rejected with the proper error message', async () => {
+    const userForLogin = {
+      username: 'tester',
+      password: 'pwpwpwpwpwpw'
+    }
+
+    const result = await api
+      .post('/api/login')
+      .send(userForLogin)
+      .expect(401)
+      .expect('Content-Type', /application\/json/)
+
+    expect(result.body.error).toContain('invalid username or password')
+  })
+
 })
 
 test('users are returned in JSON', async () => {
