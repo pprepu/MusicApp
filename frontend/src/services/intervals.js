@@ -2,6 +2,10 @@ import noteService from './notes'
 
 const HIGHEST_INTERVAL_DISTANCE = 12
 
+export const allIntervals = ['perfect unison', 'minor second', 'major second', 'minor third', 'major third',
+                      'perfect fourth', 'augmented fourth', 'perfect fifth', 'minor sixth', 'major sixth',
+                      'minor seventh', 'major seventh', 'perfect octave']
+
 const distanceToInterval = distance => {
     switch (distance) {
         case 0:

@@ -3,6 +3,7 @@ import { useSelector, useDispatch, ReactReduxContext } from 'react-redux'
 import './App.css'
 import ScaleList from './components/ScaleList'
 import noteService from './services/notes'
+import { allIntervals } from './services/intervals'
 import IntervalContainer from './components/IntervalContainer'
 import SessionSummary from './components/SessionSummary'
 import Frontpage from './components/Frontpage'
@@ -14,8 +15,10 @@ const App = () => {
 
   const user = useSelector(state => state.user)
   const currentSession = useSelector(state => state.session)
+  const currentIntervals = useSelector(state => state.intervals)
   // const choosableScales = ['c-maj', 'g-maj', 'd-maj', 'a-maj', 'f-maj', 'bb-maj', 'eb-maj', 'ab-maj']
-  const choosableScales = [...noteService.getMajorScales(), 'flat-chrom']
+  // const choosableScales = [...noteService.getMajorScales(), 'flat-chrom']
+  const choosableScales = [...noteService.getMajorScales()]
 
   const dispatch = useDispatch()
 
@@ -67,11 +70,11 @@ const App = () => {
         </div>
         {currentSession.currentPage === 'front' && <Frontpage />}
         {currentSession.currentPage === 'intervalQuestions' && <IntervalContainer />}
-        {currentSession.currentPage === 'intervalSettings' && <ScaleList scales={choosableScales} />}
+        {currentSession.currentPage === 'intervalSettings' && <ScaleList scales={choosableScales} intervals={allIntervals}/>}
         {currentSession.currentPage === 'intervalSummary' && <SessionSummary />}
         
         <div>
-          <button className='debug-button' onClick={() => console.log(currentSession, user)}>debug</button>
+          <button className='debug-button' onClick={() => console.log(currentSession, '---', currentIntervals, '---', user)}>debug</button>
         </div>
       </div>
     </div>
