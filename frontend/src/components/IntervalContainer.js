@@ -4,6 +4,9 @@ import noteService from '../services/notes'
 import intervalService from '../services/intervals'
 import { answerCorrect, answerWrong, endSession } from '../reducers/sessionReducer.js'
 
+import g_clef from '../images/g_clef.svg'
+import f1 from '../images/notes/f1.svg'
+
 import './IntervalContainer.css'
 
 
@@ -20,6 +23,7 @@ const IntervalContainer = () => {
 
     const currentSession = useSelector(state => state.session)
     const scalesInApp = useSelector(state => state.scales)
+    const intervalsInApp = useSelector(state => state.intervals)
     const dispatch = useDispatch()
 
     const INTERVALS_PER_SESSION = 3
@@ -62,15 +66,19 @@ const IntervalContainer = () => {
         const randomScaleChosen = scalesInApp[Math.floor(Math.random() * Math.floor(scalesInApp.length))]
         // console.log(randomScaleChosen)
         setCurrentScale(randomScaleChosen)
-        const randomNote1 = noteService.getRandomNoteFromScale(randomScaleChosen)
-        const randomNote2 = noteService.getRandomNoteFromScale(randomScaleChosen)
-        setNote1(randomNote1)
-        setNote2(randomNote2)
-        const currentIntervalReceived = intervalService.findIntervalForMajor(randomNote1, randomNote2, randomScaleChosen)
-        setCurrentInterval(currentIntervalReceived)
-
-        setAllIntervals(intervalService.generateAllIntervals(currentIntervalReceived))
-
+        while (true) {
+          const randomNote1 = noteService.getRandomNoteFromScale(randomScaleChosen)
+          const randomNote2 = noteService.getRandomNoteFromScale(randomScaleChosen)
+          const currentIntervalReceived = intervalService.findIntervalForMajor(randomNote1, randomNote2, randomScaleChosen)
+          if (intervalsInApp.includes(currentIntervalReceived)) {
+            setNote1(randomNote1)
+            setNote2(randomNote2)
+            setCurrentInterval(currentIntervalReceived)
+            setAllIntervals(intervalService.generateAllIntervals(currentIntervalReceived, intervalsInApp))
+            break
+          }
+        }
+        
 
       }
 
@@ -99,6 +107,9 @@ const IntervalContainer = () => {
           <div className='session-container'>
             <p>Correct answers: {currentSession.answersCorrect} </p>
             <p>Wrong answers: {currentSession.answersWrong}</p>
+          </div>
+          <div className='image-container'>
+            <img className='image-item image-item-1' src={g_clef} alt='G_clef' /><img className='image-item' src={f1} alt='F-1' /><img className='image-item' src={f1} alt='F-1' />
           </div>
           <div className='note-container'>
             <div>note 1: {note1}</div>

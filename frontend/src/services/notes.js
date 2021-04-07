@@ -36,6 +36,10 @@ const addOctaveToNote = (note, currentOctave) => {
         return note.toLowerCase() + "-2"
     }
 
+    if (currentOctave === 2) {
+        return note.toLowerCase() + "-3"
+    }
+
     throw new Error('currentOctave parameter value not allowed')
 }
 
@@ -61,6 +65,12 @@ const createNotesWithOctaves = (notes, octaves = 1) => {
 
         octavesCreated++
     }
+
+    if (notes[0][0] === 'c') {
+        currentOctave++
+    }
+
+    notesWithOctaves.push(addOctaveToNote(notes[0], currentOctave))
 
     return notesWithOctaves
 }

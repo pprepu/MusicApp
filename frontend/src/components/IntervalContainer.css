@@ -16,6 +16,25 @@
 .session-container p {
     text-indent: 1em;
 }
+
+.image-container {
+    width: 35%;
+    /* display: inline-block; */
+    /* flex-direction: row; */
+    justify-content: center;
+    /*border: solid 1px;*/
+    margin: 5px 5px 20px 5px;
+}
+
+/* img {
+    margin: 0;
+    padding: 0;
+} */
+.image-item {
+    width: 32%;
+    height: auto;
+}
+
 .note-container {
     width: 33%;
     display: flex;

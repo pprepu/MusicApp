@@ -87,8 +87,8 @@ const changePitchOneOctave = pitch => {
 const changeToEnharmonicNote = note => {
     const [freq, pitch] = note.split('-')
     switch (freq) {
-        case 'cb':
-            return `b-${pitch}`
+        // case 'cb':
+        //     return `b-${pitch}`
         case 'fb':
             return `e-${pitch}`
         case 'e#':
@@ -138,7 +138,7 @@ const shuffleArray = array => {
 }
 
 // correct interval IS CURRENTLY added to returned array as well...
-const generateAllIntervals = (correctInterval, generatedIntervals = 6) => {
+const generateAllIntervals = (correctInterval, allIntervalsReceived, generatedIntervals = 6) => {
     correctInterval = correctInterval.toLowerCase()
     const distanceOfCorrectInterval = intervalToDistance(correctInterval)
 
@@ -152,23 +152,34 @@ const generateAllIntervals = (correctInterval, generatedIntervals = 6) => {
     }
     // tee allIntervalsista defaultti, jossa kaikki, sit voit poistaa allaolevan taulukon luomisen
     // lisää maholliseksi parametriksi "kaikki maholliset intervallit" sisältävä taulukko, joka korvaa mahd. defaultin
-    const allIntervals = []
 
-    for (let i = 0; i <= HIGHEST_INTERVAL_DISTANCE; i++) {
-        if (i !== distanceOfCorrectInterval) {
-            allIntervals.push(distanceToInterval(i))
-        }
-    }
+    let allIntervalsReceivedCopy = allIntervalsReceived.filter(interval => interval !== correctInterval)
+    shuffleArray(allIntervalsReceivedCopy)
 
-    // alla olevaa voisi ehkä optimoida
-    shuffleArray(allIntervals)
-    let returnedIntervals = allIntervals.slice(0 , generatedIntervals - 1)
-
+    let returnedIntervals = allIntervalsReceivedCopy.length >= generatedIntervals - 1
+                                ? allIntervalsReceivedCopy.slice(0 , generatedIntervals - 1)
+                                : allIntervalsReceivedCopy
+    
     returnedIntervals.push(correctInterval)
-
     shuffleArray(returnedIntervals)
-
     return returnedIntervals
+    // const allIntervals = []
+
+    // for (let i = 0; i <= HIGHEST_INTERVAL_DISTANCE; i++) {
+    //     if (i !== distanceOfCorrectInterval) {
+    //         allIntervals.push(distanceToInterval(i))
+    //     }
+    // }
+
+    // // alla olevaa voisi ehkä optimoida
+    // shuffleArray(allIntervals)
+    // let returnedIntervals = allIntervals.slice(0 , generatedIntervals - 1)
+
+    // returnedIntervals.push(correctInterval)
+
+    // shuffleArray(returnedIntervals)
+
+    // return returnedIntervals
 }
 
  const findIntervalForMajor = (note1, note2, scale) => 
