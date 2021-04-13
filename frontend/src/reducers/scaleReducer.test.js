@@ -36,4 +36,34 @@ describe('scaleReducer', () => {
     expect(newState.length).toBe(2)
     
   })
+
+  test('action ADD_MULTIPLE_SCALES adds multiple scales to the state', () => {
+    const state = ['f-maj']
+    const action = {
+      type: 'ADD_MULTIPLE_SCALES',
+      data: ['c-maj', 'g-maj', 'b-maj', 'db-maj']
+    }
+
+    deepFreeze(state)
+    const newState = scaleReducer(state, action)
+
+    for (let interval of action.data) {
+      expect(newState).toContain(interval)
+    }
+
+    expect(newState.length).toBe(5)
+    
+  })
+
+  test('action RESET_SCALES removes all scales from the state', () => {
+    const state = ['bb-maj', 'eb-maj', 'd-maj']
+    const action = {
+      type: 'RESET_SCALES'
+    }
+
+    deepFreeze(state)
+    const newState = scaleReducer(state, action)
+
+    expect(newState.length).toBe(0)
+  })
 })

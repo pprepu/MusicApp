@@ -13,6 +13,14 @@ ReactDOM.render(
 )
 */
 
+// function importAll(r) {
+//   let images = {};
+//   r.keys().forEach((key) => (images[key] = r(key)));
+//   return images
+// }
+
+// const noteImages = importAll(require.context('../images/notes', false, '/\.svg$/'))
+
 ReactDOM.render(
   <Provider store={store}>
     <App />

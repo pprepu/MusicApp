@@ -24,20 +24,20 @@ const chromaticSharp = ['c', 'c#', 'd', 'd#', 'e', 'f', 'f#',
                             'g', 'g#', 'a', 'a#', 'b']
 
 //should cb be first? - if it was, also intervals.js-changeToEnharmonicNote() should be changed (case cb)
-const chromaticFlat = ['c', 'db', 'd', 'eb', 'e', 'f', 'gb', 
-                            'g', 'ab', 'a', 'bb', 'cb']
+const chromaticFlat = ['cb', 'c', 'db', 'd', 'eb', 'e', 'f', 'gb', 
+                            'g', 'ab', 'a', 'bb']
 
 const addOctaveToNote = (note, currentOctave) => {
     if (currentOctave === 0) {
-        return note.toLowerCase() + "-1"
+        return note.toLowerCase() + "_1"
     }
 
     if (currentOctave === 1) {
-        return note.toLowerCase() + "-2"
+        return note.toLowerCase() + "_2"
     }
 
     if (currentOctave === 2) {
-        return note.toLowerCase() + "-3"
+        return note.toLowerCase() + "_3"
     }
 
     throw new Error('currentOctave parameter value not allowed')
@@ -80,9 +80,8 @@ const getRandomNoteFromScale = scale => {
         console.log('scale parameter has an incorrect form')
         return
     }
-
+    // shouold this be [, scaleType] ?
     const [bassNote, scaleType] = scale.split('-')
-    //scaleType is NOT currently used
 
     if (scaleType === 'maj') {
         return getRandomNoteFromMajorScale(scale)

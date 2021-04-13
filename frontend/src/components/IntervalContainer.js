@@ -4,17 +4,19 @@ import noteService from '../services/notes'
 import intervalService from '../services/intervals'
 import { answerCorrect, answerWrong, endSession } from '../reducers/sessionReducer.js'
 
-import g_clef from '../images/g_clef.svg'
-import f1 from '../images/notes/f1.svg'
+import c_maj from '../images/clefs/g/c_maj.svg'
+import f_1 from '../images/notes/f_1.svg'
 
 import './IntervalContainer.css'
 
+import images from '../services/images'
+
 
 const IntervalContainer = () => {
-    const [note1, setNote1] = useState('')
-    const [note2, setNote2] = useState('')
+    const [note1, setNote1] = useState('c_1')
+    const [note2, setNote2] = useState('c_1')
     // currentScale käyttö, jotta sävelet samasta asteikosta vs randomizer kaikista valituista
-    const [currentScale, setCurrentScale] = useState('')
+    const [currentScale, setCurrentScale] = useState('c-maj')
     const [currentInterval, setCurrentInterval] = useState('')
     const [allIntervals, setAllIntervals] = useState([])
     const [answer, setAnswer] = useState(null)
@@ -26,7 +28,7 @@ const IntervalContainer = () => {
     const intervalsInApp = useSelector(state => state.intervals)
     const dispatch = useDispatch()
 
-    const INTERVALS_PER_SESSION = 3
+    const INTERVALS_PER_SESSION = 5
 
     // const setRandomNotes = () => {
     //     if (scalesInApp.length ===  0) {
@@ -101,6 +103,16 @@ const IntervalContainer = () => {
         }
         // console.log(currentSession.sessionHistory)
       }
+
+    const modifyNoteName = note => {
+      const [freq, octave] = note.split('_')
+      return `${freq[0]}_${octave}`
+    }
+
+    const modifyScaleName = scale => {
+      const [bass, type] = scale.split('-')
+      return `${bass}_${type}`
+    }
     
     return (
         <div className='interval-container'>
@@ -109,7 +121,7 @@ const IntervalContainer = () => {
             <p>Wrong answers: {currentSession.answersWrong}</p>
           </div>
           <div className='image-container'>
-            <img className='image-item image-item-1' src={g_clef} alt='G_clef' /><img className='image-item' src={f1} alt='F-1' /><img className='image-item' src={f1} alt='F-1' />
+            <img className='image-item image-item-1' src={images.clefs.g[modifyScaleName(currentScale)]} alt='c-maj' /><img className='image-item' src={images.notes[modifyNoteName(note1)]} alt='F-1' /><img className='image-item' src={images.notes[modifyNoteName(note2)]} alt='F-1' />
           </div>
           <div className='note-container'>
             <div>note 1: {note1}</div>

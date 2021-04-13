@@ -1,5 +1,5 @@
 
-const initialState = []
+export const initialState = []
 
 const intervalReducer = (state = initialState, action) => {
     switch (action.type) {

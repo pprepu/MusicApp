@@ -72,29 +72,29 @@ const intervalToDistance = interval => {
     }
 }
 
-const changePitchOneOctave = pitch => {
+const changePitchOneOctaveHigher = pitch => {
     switch (pitch) {
         case '1':
             return '2'
         case '2':
             return '3'
         default:
-            console.log('@ changePitchOneOctave - default')
+            console.log('@ changePitchOneOctaveHigher - default')
             return pitch
     }
 }
 
 const changeToEnharmonicNote = note => {
-    const [freq, pitch] = note.split('-')
+    const [freq, pitch] = note.split('_')
     switch (freq) {
         // case 'cb':
-        //     return `b-${pitch}`
+        //     return `b_${pitch}`
         case 'fb':
-            return `e-${pitch}`
+            return `e_${pitch}`
         case 'e#':
-            return `f-${pitch}`
+            return `f_${pitch}`
         case 'b#':
-            return `c-${changePitchOneOctave(pitch)}`
+            return `c_${changePitchOneOctaveHigher(pitch)}`
         default:
             return note
     }
@@ -141,6 +141,7 @@ const shuffleArray = array => {
 const generateAllIntervals = (correctInterval, allIntervalsReceived, generatedIntervals = 6) => {
     correctInterval = correctInterval.toLowerCase()
     const distanceOfCorrectInterval = intervalToDistance(correctInterval)
+    // console.log('allIntervalsReceived:', allIntervalsReceived)
 
     if (distanceOfCorrectInterval === '') {
         console.log(correctInterval)
@@ -155,6 +156,7 @@ const generateAllIntervals = (correctInterval, allIntervalsReceived, generatedIn
 
     let allIntervalsReceivedCopy = allIntervalsReceived.filter(interval => interval !== correctInterval)
     shuffleArray(allIntervalsReceivedCopy)
+    // console.log('allIntervalsReceived after filtering:', allIntervalsReceivedCopy)
 
     let returnedIntervals = allIntervalsReceivedCopy.length >= generatedIntervals - 1
                                 ? allIntervalsReceivedCopy.slice(0 , generatedIntervals - 1)

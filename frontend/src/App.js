@@ -10,6 +10,8 @@ import Frontpage from './components/Frontpage'
 import { loginUser, logoutUser } from './reducers/userReducer'
 
 
+
+
 const App = () => {
   // const [intervalMode, setIntervalMode] = useState(false)
 

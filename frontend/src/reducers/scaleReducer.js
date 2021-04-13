@@ -8,7 +8,7 @@ const scaleReducer = (state = initialState, action) => {
             return initialState
         case 'ADD_SCALE':
             return [...state, action.data]
-        case 'ADD_MULTIPLE':
+        case 'ADD_MULTIPLE_SCALES':
             return [...state, ...action.data]
         case 'REMOVE_SCALE':
             return state.filter(scale => scale !== action.data)
@@ -26,7 +26,7 @@ export const addScale = scale => {
 
 export const addMultipleScales = scales => {
     return {
-        type: 'ADD_MULTIPLE',
+        type: 'ADD_MULTIPLE_SCALES',
         data: scales
     }
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch, ReactReduxContext } from 'react-redux'
 import { resetSession } from '../reducers/sessionReducer.js'
 import { resetScales } from '../reducers/scaleReducer.js'
+import { resetIntervals } from '../reducers/intervalReducer.js'
 
 import './SessionSummary.css'
 
@@ -61,6 +62,7 @@ const SessionSummary = () => {
     const resetApp = () => {
         dispatch(resetSession())
         dispatch(resetScales())
+        dispatch(resetIntervals())
     }
     return (
         <div className='summary-container'>
