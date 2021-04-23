@@ -1,4 +1,4 @@
-const majorScales = {
+export const majorScales = {
     c: ['c', 'd', 'e', 'f', 'g', 'a' ,'b'],
     g: ['g', 'a', 'b', 'c', 'd', 'e', 'f#'],
     d: ['d', 'e', 'f#', 'g', 'a', 'b', 'c#'],
@@ -20,11 +20,11 @@ const getMajorScales = () => {
     return Object.keys(majorScales).map(key => key + "-maj")
 }
 
-const chromaticSharp = ['c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 
+export const chromaticSharp = ['c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 
                             'g', 'g#', 'a', 'a#', 'b']
 
 //should cb be first? - if it was, also intervals.js-changeToEnharmonicNote() should be changed (case cb)
-const chromaticFlat = ['cb', 'c', 'db', 'd', 'eb', 'e', 'f', 'gb', 
+export const chromaticFlat = ['cb', 'c', 'db', 'd', 'eb', 'e', 'f', 'gb', 
                             'g', 'ab', 'a', 'bb']
 
 const addOctaveToNote = (note, currentOctave) => {
@@ -77,11 +77,11 @@ const createNotesWithOctaves = (notes, octaves = 1) => {
 
 const getRandomNoteFromScale = scale => {
     if (scale.indexOf('-') === -1) {
-        console.log('scale parameter has an incorrect form')
-        return
+        throw new Error('scale parameter has an incorrect form')
     }
-    // shouold this be [, scaleType] ?
-    const [bassNote, scaleType] = scale.split('-')
+
+    // toLowerCase() can be used for scaletypes, but not for the left side/bassnotes
+    const [, scaleType] = scale.toLowerCase().split('-')
 
     if (scaleType === 'maj') {
         return getRandomNoteFromMajorScale(scale)
@@ -89,15 +89,15 @@ const getRandomNoteFromScale = scale => {
         return getRandomNoteFromChromaticScale(scale)
     }
 
+    throw new Error('scale type could not be handled ')
+
 }
 
 const getRandomNoteFromMajorScale = scale => {
-    const [bassNote, scaleType] = scale.split('-')
-    //scaleType is NOT currently used
+    const [bassNote, ] = scale.split('-')
 
     if (!majorScales[bassNote]) {
-        console.log('scale not found')
-        return
+        throw new Error('scale not found')
     }
 
     const notesForScale = createNotesWithOctaves(majorScales[bassNote])
@@ -106,8 +106,18 @@ const getRandomNoteFromMajorScale = scale => {
 }
 
 const getRandomNoteFromChromaticScale = scale => {
-    const notesForChromaticScale = createNotesWithOctaves(chromaticFlat)
+    const [chromatics, ] = scale.split('-')
 
+    let notesForChromaticScale
+
+    if (chromatics === 'flat') {
+        notesForChromaticScale = createNotesWithOctaves(chromaticFlat)
+    } else if (chromatics === 'sharp') {
+        notesForChromaticScale = createNotesWithOctaves(chromaticSharp)
+    } else {
+        throw new Error('scale not valid')
+    }
+    
     return notesForChromaticScale[Math.floor(Math.random() * Math.floor(notesForChromaticScale.length))]
 }
 
@@ -125,9 +135,10 @@ const getCorrectChromaticScale = scale => {
     } else if (scaleType === 'chrom') {
         return getCorrectChromaticScaleForChromatic(scale)
     }
+
+    throw new Error('scale type could not be handled ')
 }
 
-// vois tehä yleisfunktion getCorrectChromaticScale joka sit spesifioi halutun asteikon scaleTypen avulla
 const getCorrectChromaticScaleForMajor = scale => {
     if (scale.indexOf('-') === -1) {
         // consistency with: throw new Error VS console.log
