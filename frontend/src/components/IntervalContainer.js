@@ -4,8 +4,6 @@ import noteService from '../services/notes'
 import intervalService from '../services/intervals'
 import { answerCorrect, answerWrong, endSession } from '../reducers/sessionReducer.js'
 
-import c_maj from '../images/clefs/g/c_maj.svg'
-import f_1 from '../images/notes/f_1.svg'
 
 import './IntervalContainer.css'
 
