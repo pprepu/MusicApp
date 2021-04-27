@@ -4,6 +4,7 @@ const helper = require('./test_helper')
 
 const bcrypt = require('bcrypt')
 const User = require('../models/user')
+const Session = require('../models/session')
 
 const app = require('../app')
 
@@ -168,6 +169,13 @@ describe('while there is a user in the database', () => {
 test('users are returned in JSON', async () => {
   await api
     .get('/api/users')
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+})
+
+test('sessions are returned in JSON', async () => {
+  await api
+    .get('/api/sessions')
     .expect(200)
     .expect('Content-Type', /application\/json/)
 })

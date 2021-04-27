@@ -39,6 +39,7 @@ export const initialSession = {
 // }
 
 export const initialSession = {
+    sessionType: 'interval',
     answersCorrect: 0,
     answersWrong: 0,
     currentPage: 'front',

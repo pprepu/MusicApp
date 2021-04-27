@@ -1,8 +1,8 @@
 const bcrypt = require('bcrypt')
-const usersRouter = require('express').Router()
+const userRouter = require('express').Router()
 const User = require('../models/user')
 
-usersRouter.post('/', async (req, res, next) => {
+userRouter.post('/', async (req, res, next) => {
   const body = req.body
   const saltRounds = 10
 
@@ -30,14 +30,14 @@ usersRouter.post('/', async (req, res, next) => {
 })
 
 //lisää try-catch -->
-usersRouter.get('/', async (req, res) => {
+userRouter.get('/', async (req, res) => {
   const users = await User.find({})
   res.json(users.map(user => user.toJSON()))
 })
 
 //for debugging
-usersRouter.get('/info', (req, res) => {
+userRouter.get('/info', (req, res) => {
   res.send('<h1> USERS COULD BE HERE? </h1>')
 })
 
-module.exports = usersRouter
+module.exports = userRouter

@@ -1,0 +1,6 @@
+POST http://localhost:3001/api/sessions
+Content-Type: application/json
+
+{
+  "sessionType": "interval"
+}
