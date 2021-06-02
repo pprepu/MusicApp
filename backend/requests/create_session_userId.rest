@@ -1,0 +1,16 @@
+POST http://localhost:3001/api/sessions
+Content-Type: application/json
+
+{
+  "sessionType": "interval",
+  "answersWrong": 0,
+  "answersCorrect": 5,
+  "sessionHistory": [
+      { "answer": "perfect unison", "correctAnswer" : "perfect unison"},
+      { "answer": "perfect unison", "correctAnswer" : "perfect unison"},
+      { "answer": "perfect unison", "correctAnswer" : "perfect unison"},
+      { "answer": "perfect unison", "correctAnswer" : "perfect unison"},
+      { "answer": "perfect unison", "correctAnswer" : "perfect unison"}
+    ],
+  "userId": "608972da5c527b17bc39aa65"
+}

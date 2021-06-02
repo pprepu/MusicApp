@@ -1,5 +1,6 @@
 const sessionRouter = require('express').Router()
 const Session = require('../models/session')
+const User = require('../models/user')
 
 sessionRouter.post('/', async (req, res, next) => {
   const body = req.body
@@ -17,9 +18,25 @@ sessionRouter.post('/', async (req, res, next) => {
     sessionHistory: body.sessionHistory || [],
     date: new Date(),
   })
+
+  let user = null
+  if (body.userId) {
+    try {
+      user = await User.findById(body.userId)
+      session.user = user._id
+    } catch(exception) {
+      next(exception)
+      return
+    }
+    
+  }
   
   try { 
     const savedSession = await session.save()
+    if (user) {
+      user.sessions = user.sessions.concat(savedSession._id)
+      await user.save()
+    }
     res.json(savedSession)
   } catch(exception) {
     next(exception)
@@ -28,7 +45,9 @@ sessionRouter.post('/', async (req, res, next) => {
 
 //lisää try-catch -->
 sessionRouter.get('/', async (req, res) => {
-  const sessions = await Session.find({})
+  const sessions = await Session
+    .find({})
+    .populate('user', { username: 1 })
   res.json(sessions.map(session => session.toJSON()))
 })
   

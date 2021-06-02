@@ -31,8 +31,25 @@ userRouter.post('/', async (req, res, next) => {
 
 //lisää try-catch -->
 userRouter.get('/', async (req, res) => {
-  const users = await User.find({})
+  const users = await User
+    .find({})
+    .populate('sessions')
   res.json(users.map(user => user.toJSON()))
+})
+
+userRouter.get('/:id', async (req, res, next) => {
+  let user = null
+  try {
+    user = await User.findById(req.params.id)
+  } catch(exception) {
+    next(exception)
+  }
+  
+  if (user) {
+    res.json(user.toJSON())
+  } else {
+    res.status(404).end()
+  }
 })
 
 //for debugging

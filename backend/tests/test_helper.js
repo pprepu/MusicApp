@@ -11,7 +11,16 @@ const getSessions = async () => {
   return sessions.map(session => session.toJSON())
 }
 
+const nonExistingSessionId = async () => {
+  const session = new Session({ sessionType: 'interval' })
+  await session.save()
+  await session.remove()
+
+  return session._id.toString()
+}
+
 module.exports = {
   getUsers,
-  getSessions
+  getSessions,
+  nonExistingSessionId
 }
