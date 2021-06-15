@@ -6,7 +6,7 @@ import { resetIntervals } from '../reducers/intervalReducer.js'
 
 import './SessionSummary.css'
 
-const SummaryItem = ({ correct, answer, correctInterval }) => {
+export const SummaryItem = ({ correct, answer, correctAnswer }) => {
     const [hover, setHover] = useState(false)
     const HoverTextVisible = {
         visibility: 'visible',
@@ -34,7 +34,7 @@ const SummaryItem = ({ correct, answer, correctInterval }) => {
               }}
               
               className='history-item history-item-correct'>
-                  <span style={(hover ? HoverTextVisible : HoverTextHidden)}>answer: {answer} - correct: {correctInterval}</span>
+                  <span style={(hover ? HoverTextVisible : HoverTextHidden)}>answer: {answer} - correct: {correctAnswer}</span>
             </div>
         )
     } else {
@@ -48,7 +48,7 @@ const SummaryItem = ({ correct, answer, correctInterval }) => {
                 setHover(false);
               }}
               className='history-item history-item-incorrect'>
-                  <span style={(hover ? HoverTextVisible : HoverTextHidden)}>answer: {answer} - correct: {correctInterval}</span>
+                  <span style={(hover ? HoverTextVisible : HoverTextHidden)}>answer: {answer} - correct: {correctAnswer}</span>
 
             </div>
         )
@@ -76,9 +76,9 @@ const SessionSummary = () => {
                 {currentSession.sessionHistory.map((question, index) => 
                     <SummaryItem 
                         key={index} 
-                        correct={question.answer === question.correctInterval} 
+                        correct={question.answer === question.correctAnswer} 
                         answer={question.answer} 
-                        correctInterval={question.correctInterval}
+                        correctAnswer={question.correctAnswer}
                     />
                 )}
             </div>

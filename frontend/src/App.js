@@ -1,19 +1,39 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch, ReactReduxContext } from 'react-redux'
 import './App.css'
-import ScaleList from './components/ScaleList'
+
 import noteService from './services/notes'
 import { allIntervals } from './services/intervals'
+
+import ScaleList from './components/ScaleList'
 import IntervalContainer from './components/IntervalContainer'
 import SessionSummary from './components/SessionSummary'
 import Frontpage from './components/Frontpage'
+import LoginForm from './components/LoginForm'
+import Userpage from './components/Userpage'
+
 import { loginUser, logoutUser } from './reducers/userReducer'
-
-
+import { visitUserpage, resetSession } from './reducers/sessionReducer'
+import { resetScales } from './reducers/scaleReducer.js'
+import { resetIntervals } from './reducers/intervalReducer.js'
 
 
 const App = () => {
   // const [intervalMode, setIntervalMode] = useState(false)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('musicappUserLoggedIn')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      dispatch(loginUser(user))
+    } else {
+      dispatch(resetSession())
+      dispatch(resetScales())
+      dispatch(resetIntervals())
+    }
+  }, [])
 
   const user = useSelector(state => state.user)
   const currentSession = useSelector(state => state.session)
@@ -22,41 +42,14 @@ const App = () => {
   // const choosableScales = [...noteService.getMajorScales(), 'flat-chrom']
   const choosableScales = [...noteService.getMajorScales()]
 
-  const dispatch = useDispatch()
-
   const getDate = () => {
     return new Date().toDateString().split(" ").slice(1).join(" ")
   }
 
-  const mockLogin = () => {
-    const mockUser = {
-      username: 'Annika'
-    }
-
-    dispatch(loginUser(mockUser)) 
-  }
-
-  const mockLogout = () => {
+  const handleLogout = () => {
     dispatch(logoutUser())
+    window.localStorage.removeItem('musicappUserLoggedIn')
   }
-
-  const handleLogin = () => {
-    if (user) {
-      mockLogout()
-    } else {
-      mockLogin()
-    }
-  }
-  // return (
-  //   <div>
-  //     {intervalMode && <IntervalContainer />}
-  //     {!intervalMode && <ScaleList scales={choosableScales} />}
-
-  //     <div>
-  //       {scalesInApp.length > 0 && <button onClick={() => setIntervalMode(!intervalMode)}> START </button>}
-  //     </div>
-  //   </div>
-  // )
 
   return (
     <div className='App-container'>
@@ -65,8 +58,8 @@ const App = () => {
           <div className='menu'>
           <div className='date'>{getDate()}</div>
           <div className='links'>
-            <div className='signup'>{user ? <p>{user.username}</p>: <p>Signup</p>}</div>
-            <div className='login' onClick={() => handleLogin()}>{user ? <p>Logout</p>: <p>Login</p>}</div>
+            <div className='signup'>{user ? <p onClick={() => dispatch(visitUserpage() )}>{user.username}</p> : <p>Signup</p>}</div>
+            <div className='login'>{user ? <p onClick={() => handleLogout() }>Logout</p> : <LoginForm />}</div>
           </div>
           </div>
         </div>
@@ -74,6 +67,7 @@ const App = () => {
         {currentSession.currentPage === 'intervalQuestions' && <IntervalContainer />}
         {currentSession.currentPage === 'intervalSettings' && <ScaleList scales={choosableScales} intervals={allIntervals}/>}
         {currentSession.currentPage === 'intervalSummary' && <SessionSummary />}
+        {currentSession.currentPage === 'userPage' && <Userpage />}
         
         <div>
           <button className='debug-button' onClick={() => console.log(currentSession, '---', currentIntervals, '---', user)}>debug</button>

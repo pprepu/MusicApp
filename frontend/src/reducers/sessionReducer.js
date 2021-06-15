@@ -61,6 +61,8 @@ const sessionReducer = (state = initialSession, action) => {
             return { ...state, currentPage: 'intervalQuestions' }
         case 'END_SESSION':
             return { ...state, currentPage: 'intervalSummary' }
+        case 'VISIT_USERPAGE':
+            return { ...state, currentPage: 'userPage' }
         default:
             return state
     }
@@ -88,6 +90,10 @@ export const answerWrong = data => {
 
 export const resetSession = () => {
     return { type: 'RESET_SESSION' }
+}
+
+export const visitUserpage = () => {
+    return { type: 'VISIT_USERPAGE' }
 }
 
 

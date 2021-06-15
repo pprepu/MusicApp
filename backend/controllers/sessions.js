@@ -1,6 +1,16 @@
 const sessionRouter = require('express').Router()
+const jwt = require('jsonwebtoken')
 const Session = require('../models/session')
 const User = require('../models/user')
+
+const getTokenFromReq = req => {
+  const auth = req.get('authorization')
+  if (auth && auth.toLowerCase().startsWith('bearer ')) {
+    return auth.substring(7)
+  }
+
+  return null
+}
 
 sessionRouter.post('/', async (req, res, next) => {
   const body = req.body
@@ -10,37 +20,53 @@ sessionRouter.post('/', async (req, res, next) => {
       error: 'A session type must be provided'
     })
   }
-  
-  const session = new Session({
-    sessionType: body.sessionType,
-    answersCorrect: body.answersCorrect || 0,
-    answersWrong: body.answersWrong || 0,
-    sessionHistory: body.sessionHistory || [],
-    date: new Date(),
-  })
 
-  let user = null
-  if (body.userId) {
-    try {
-      user = await User.findById(body.userId)
-      session.user = user._id
-    } catch(exception) {
-      next(exception)
-      return
+  const token = getTokenFromReq(req)
+
+  try {
+
+    const decodedToken = jwt.verify(token, process.env.SECRET)
+    if (!token || !decodedToken.id) {
+      return res.status(401).json({ error: 'token missing or invalid' })
     }
-    
-  }
-  
-  try { 
+    let user = await User.findById(decodedToken.id)
+
+    const session = new Session({
+      sessionType: body.sessionType,
+      answersCorrect: body.answersCorrect || 0,
+      answersWrong: body.answersWrong || 0,
+      sessionHistory: body.sessionHistory || [],
+      date: new Date(),
+      user: user._id
+    })
     const savedSession = await session.save()
-    if (user) {
-      user.sessions = user.sessions.concat(savedSession._id)
-      await user.save()
-    }
-    res.json(savedSession)
-  } catch(exception) {
+    user.sessions = user.sessions.concat(savedSession._id)
+    await user.save()
+
+    res.json(savedSession.toJSON())
+  } catch (exception) {
     next(exception)
   }
+  
+  
+
+  // let user = null
+  // if (body.userId) {
+  //   try {
+  //     const token = getTokenFromReq(req)
+  //     const decodedToken = jwt.verify(token, process.env.SECRET)
+  //     if (!token || !decodedToken.id) {
+  //       return res.status(401).json({ error: 'token missing or invalid' })
+  //     }
+  //     user = await User.findById(body.userId)
+  //     session.user = user._id
+  //   } catch(exception) {
+  //     next(exception)
+  //     return
+  //   }
+    
+  // }
+  
 })
 
 //lisää try-catch -->

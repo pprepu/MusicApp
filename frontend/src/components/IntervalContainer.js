@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch, ReactReduxContext } from 'react-redux'
+
 import noteService from '../services/notes'
 import intervalService from '../services/intervals'
+import sessionService from '../services/sessions'
+
 import { answerCorrect, answerWrong, endSession } from '../reducers/sessionReducer.js'
 
 
@@ -22,6 +25,7 @@ const IntervalContainer = () => {
     const [firstQuestion, setFirstQuestion] = useState(true)
 
     const currentSession = useSelector(state => state.session)
+    const user = useSelector(state => state.user)
     const scalesInApp = useSelector(state => state.scales)
     const intervalsInApp = useSelector(state => state.intervals)
     const dispatch = useDispatch()
@@ -92,7 +96,7 @@ const IntervalContainer = () => {
         setHasAnswered(true)
         const answerData = {
           answer,
-          correctInterval: currentInterval
+          correctAnswer: currentInterval
         }
         if (answer === currentInterval) {
           dispatch(answerCorrect(answerData))
@@ -110,6 +114,17 @@ const IntervalContainer = () => {
     const modifyScaleName = scale => {
       const [bass, type] = scale.split('-')
       return `${bass}_${type}`
+    }
+
+    const finishSession = () => {
+      if (user) {
+        sessionService.create(currentSession)
+          .then(res => dispatch(endSession()))
+          .catch(err => console.log(err))
+      } else {
+        dispatch(endSession())
+      }
+      
     }
     
     return (
@@ -135,7 +150,7 @@ const IntervalContainer = () => {
             {hasAnswered 
               ? currentSession.answersCorrect + currentSession.answersWrong < INTERVALS_PER_SESSION 
                 ? <button onClick={() => askForInterval()}>next Interval</button>
-                : <button onClick={() => dispatch(endSession())}>end session</button>
+                : <button onClick={() => finishSession()}>end session</button>
               : answer && <button onClick={() => giveAnswer(answer)}>answer</button>
             }
             

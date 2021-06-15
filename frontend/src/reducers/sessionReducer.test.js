@@ -24,7 +24,7 @@ describe('sessionReducer', () => {
 
     const data = {
       answer: 'perfect unison',
-      correctInterval: 'perfect unison'
+      correctAnswer: 'perfect unison'
     }
     const action = {
       type: 'ADD_CORRECT',
@@ -40,7 +40,7 @@ describe('sessionReducer', () => {
 
     expect(newState.sessionHistory.length).toBe(1)
     expect(newState.sessionHistory[0].answer).toBe('perfect unison')
-    expect(newState.sessionHistory[0].correctInterval).toBe('perfect unison')
+    expect(newState.sessionHistory[0].correctAnswer).toBe('perfect unison')
     
   })
 
@@ -49,7 +49,7 @@ describe('sessionReducer', () => {
 
     const data = {
       answer: 'perfect octave',
-      correctInterval: 'major third'
+      correctAnswer: 'major third'
     }
     const action = {
       type: 'ADD_WRONG',
@@ -65,7 +65,7 @@ describe('sessionReducer', () => {
 
     expect(newState.sessionHistory.length).toBe(8)
     expect(newState.sessionHistory[newState.sessionHistory.length - 1].answer).toBe('perfect octave')
-    expect(newState.sessionHistory[newState.sessionHistory.length - 1].correctInterval).toBe('major third')
+    expect(newState.sessionHistory[newState.sessionHistory.length - 1].correctAnswerl).toBe('major third')
   })
 
   test('action START_SETTINGS changes the page to the correct one, but does not affect other values', () => {

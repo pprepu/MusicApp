@@ -40,7 +40,9 @@ userRouter.get('/', async (req, res) => {
 userRouter.get('/:id', async (req, res, next) => {
   let user = null
   try {
-    user = await User.findById(req.params.id)
+    user = await User
+      .findById(req.params.id)
+      .populate('sessions')
   } catch(exception) {
     next(exception)
   }

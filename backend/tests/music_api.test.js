@@ -10,6 +10,19 @@ const app = require('../app')
 
 const api = supertest(app)
 
+const loginUser = async () => {
+  const userForLogin = {
+    username: 'tester',
+    password: 'secret_password'
+  }
+
+  const loginResult = await api
+    .post('/api/login')
+    .send(userForLogin)
+
+  return loginResult
+}
+
 describe('while there is a user in the database', () => {
   beforeEach(async () => {
     await User.deleteMany({})
@@ -162,6 +175,102 @@ describe('while there is a user in the database', () => {
       .expect('Content-Type', /application\/json/)
 
     expect(result.body.error).toContain('invalid username or password')
+  })
+
+  describe('a new session', () => {
+  
+    test('can be created with a valid token', async () => {
+    
+      const sessionsAtStart = await helper.getSessions()
+  
+      const sessionToSend = {
+        sessionType: 'interval',
+        answersWrong: 0,
+        answersCorrect: 5,
+        sessionHistory: [
+          { answer: 'perfect unison', correctAnswer : 'perfect unison' },
+          { answer: 'perfect unison', correctAnswer : 'perfect unison' },
+          { answer: 'perfect unison', correctAnswer : 'perfect unison' },
+          { answer: 'perfect unison', correctAnswer : 'perfect unison' },
+          { answer: 'perfect unison', correctAnswer : 'perfect unison' },
+        ]
+      }
+
+      const loginResult = await loginUser()
+  
+      const result = await api
+        .post('/api/sessions')
+        .send(sessionToSend)
+        .set('Authorization', `bearer ${loginResult.body.token}`)
+        .expect(200)
+        .expect('Content-Type', /application\/json/)
+  
+      
+      const sessionsAtEnd = await helper.getSessions()
+  
+      expect(sessionsAtEnd).toHaveLength(sessionsAtStart.length + 1)
+    })
+
+    test('cannot be created without a valid token - no token sent', async () => {
+    
+      const sessionsAtStart = await helper.getSessions()
+  
+      const sessionToSend = {
+        sessionType: 'interval',
+        answersWrong: 0,
+        answersCorrect: 5,
+        sessionHistory: [
+          { answer: 'perfect unison', correctAnswer : 'perfect unison' },
+          { answer: 'perfect unison', correctAnswer : 'perfect unison' },
+          { answer: 'perfect unison', correctAnswer : 'perfect unison' },
+          { answer: 'perfect unison', correctAnswer : 'perfect unison' },
+          { answer: 'perfect unison', correctAnswer : 'perfect unison' },
+        ]
+      }
+  
+      const result = await api
+        .post('/api/sessions')
+        .send(sessionToSend)
+        .expect(401)
+        .expect('Content-Type', /application\/json/)
+  
+      
+      const sessionsAtEnd = await helper.getSessions()
+  
+      expect(sessionsAtEnd).toHaveLength(sessionsAtStart.length)
+      expect(result.body.error).toContain('Invalid token')
+    })
+
+    test('cannot be created without a valid token - an incorrect token sent', async () => {
+    
+      const sessionsAtStart = await helper.getSessions()
+  
+      const sessionToSend = {
+        sessionType: 'interval',
+        answersWrong: 0,
+        answersCorrect: 5,
+        sessionHistory: [
+          { answer: 'perfect unison', correctAnswer : 'perfect unison' },
+          { answer: 'perfect unison', correctAnswer : 'perfect unison' },
+          { answer: 'perfect unison', correctAnswer : 'perfect unison' },
+          { answer: 'perfect unison', correctAnswer : 'perfect unison' },
+          { answer: 'perfect unison', correctAnswer : 'perfect unison' },
+        ]
+      }
+  
+      const result = await api
+        .post('/api/sessions')
+        .send(sessionToSend)
+        .set('Authorization', 'thisIsNotAValidTokenRight')
+        .expect(401)
+        .expect('Content-Type', /application\/json/)
+  
+      
+      const sessionsAtEnd = await helper.getSessions()
+  
+      expect(sessionsAtEnd).toHaveLength(sessionsAtStart.length)
+      expect(result.body.error).toContain('Invalid token')
+    })
   })
 
 })

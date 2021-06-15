@@ -1,0 +1,11 @@
+.login-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.login-item {
+    font-size: 8px;
+    width: 11%;
+    height: auto;
+}
