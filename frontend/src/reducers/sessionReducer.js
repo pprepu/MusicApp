@@ -63,6 +63,8 @@ const sessionReducer = (state = initialSession, action) => {
             return { ...state, currentPage: 'intervalSummary' }
         case 'VISIT_USERPAGE':
             return { ...state, currentPage: 'userPage' }
+        case 'VISIT_LOGINPAGE':
+            return { ...state, currentPage: 'login' }
         default:
             return state
     }
@@ -94,6 +96,10 @@ export const resetSession = () => {
 
 export const visitUserpage = () => {
     return { type: 'VISIT_USERPAGE' }
+}
+
+export const visitLoginpage = () => {
+    return { type: 'VISIT_LOGINPAGE' }
 }
 
 

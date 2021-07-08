@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch, ReactReduxContext } from 'react-redux'
-import './App.css'
+// import './App.css'
 
 import noteService from './services/notes'
 import { allIntervals } from './services/intervals'
@@ -11,6 +11,8 @@ import SessionSummary from './components/SessionSummary'
 import Frontpage from './components/Frontpage'
 import LoginForm from './components/LoginForm'
 import Userpage from './components/Userpage'
+import Navbar from './components/Navbar/Navbar'
+import GlobalStyle, { Button, Page, StyledButton } from './globalStyles'
 
 import { loginUser, logoutUser } from './reducers/userReducer'
 import { visitUserpage, resetSession } from './reducers/sessionReducer'
@@ -33,7 +35,7 @@ const App = () => {
       dispatch(resetScales())
       dispatch(resetIntervals())
     }
-  }, [])
+  }, [dispatch])
 
   const user = useSelector(state => state.user)
   const currentSession = useSelector(state => state.session)
@@ -42,39 +44,56 @@ const App = () => {
   // const choosableScales = [...noteService.getMajorScales(), 'flat-chrom']
   const choosableScales = [...noteService.getMajorScales()]
 
-  const getDate = () => {
-    return new Date().toDateString().split(" ").slice(1).join(" ")
-  }
+  // const getDate = () => {
+  //   return new Date().toDateString().split(" ").slice(1).join(" ")
+  // }
 
-  const handleLogout = () => {
-    dispatch(logoutUser())
-    window.localStorage.removeItem('musicappUserLoggedIn')
-  }
+  // const handleLogout = () => {
+  //   dispatch(logoutUser())
+  //   window.localStorage.removeItem('musicappUserLoggedIn')
+  // }
 
   return (
-    <div className='App-container'>
-      <div className='App'>
-        <div className='menu-container'>
-          <div className='menu'>
-          <div className='date'>{getDate()}</div>
-          <div className='links'>
-            <div className='signup'>{user ? <p onClick={() => dispatch(visitUserpage() )}>{user.username}</p> : <p>Signup</p>}</div>
-            <div className='login'>{user ? <p onClick={() => handleLogout() }>Logout</p> : <LoginForm />}</div>
-          </div>
-          </div>
-        </div>
-        {currentSession.currentPage === 'front' && <Frontpage />}
-        {currentSession.currentPage === 'intervalQuestions' && <IntervalContainer />}
-        {currentSession.currentPage === 'intervalSettings' && <ScaleList scales={choosableScales} intervals={allIntervals}/>}
-        {currentSession.currentPage === 'intervalSummary' && <SessionSummary />}
-        {currentSession.currentPage === 'userPage' && <Userpage />}
-        
-        <div>
-          <button className='debug-button' onClick={() => console.log(currentSession, '---', currentIntervals, '---', user)}>debug</button>
-        </div>
-      </div>
-    </div>
+    <Page>
+      <GlobalStyle />
+      <Navbar />
+      {currentSession.currentPage === 'login' && <LoginForm />}
+      {currentSession.currentPage === 'front' && <Frontpage />}
+      {currentSession.currentPage === 'intervalQuestions' && <IntervalContainer />}
+      {currentSession.currentPage === 'intervalSettings' && <ScaleList scales={choosableScales} intervals={allIntervals}/>}
+      {currentSession.currentPage === 'intervalSummary' && <SessionSummary />}
+      {currentSession.currentPage === 'userPage' && <Userpage />}
+      
+      {/* <div>
+        <StyledButton fontBig big onClick={() => console.log(currentSession, '---', currentIntervals, '---', user)}>debug</StyledButton>
+      </div> */}
+    </Page>
   )
+
+  // return (
+  //   <div className='App-container'>
+  //     <div className='App'>
+  //       <div className='menu-container'>
+  //         <div className='menu'>
+  //           <div className='date'>{getDate()}</div>
+  //           <div className='links'>
+  //             <div className='signup'>{user ? <p onClick={() => dispatch(visitUserpage() )}>{user.username}</p> : <p>Signup</p>}</div>
+  //             <div className='login'>{user ? <p onClick={() => handleLogout() }>Logout</p> : <LoginForm />}</div>
+  //           </div>
+  //         </div>
+  //       </div>
+  //       {currentSession.currentPage === 'front' && <Frontpage />}
+  //       {currentSession.currentPage === 'intervalQuestions' && <IntervalContainer />}
+  //       {currentSession.currentPage === 'intervalSettings' && <ScaleList scales={choosableScales} intervals={allIntervals}/>}
+  //       {currentSession.currentPage === 'intervalSummary' && <SessionSummary />}
+  //       {currentSession.currentPage === 'userPage' && <Userpage />}
+        
+  //       <div>
+  //         <button className='debug-button' onClick={() => console.log(currentSession, '---', currentIntervals, '---', user)}>debug</button>
+  //       </div>
+  //     </div>
+  //   </div>
+  // )
 }
 /*
 const App = () => {

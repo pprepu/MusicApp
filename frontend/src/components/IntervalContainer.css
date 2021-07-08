@@ -51,6 +51,10 @@
 }
 .answer-button {
     background-color: white;
+    height: 35px;
+    width: 19%;
+    margin-bottom: 10px;
+    margin-right: 5px;
 }
 .answer-button-answered {
     background-color: grey;

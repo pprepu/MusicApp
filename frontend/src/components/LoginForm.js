@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { loginUser } from '../reducers/userReducer'
+import { resetSession } from '../reducers/sessionReducer'
 import loginService from '../services/login'
 import sessionService from '../services/sessions'
-import './LoginForm.css'
+
+import { FormRow, FormInput, FormLabel, StyledButton, SubPage } from '../globalStyles'
+import { FormLogin } from './LoginForm.elements'
+// import './LoginForm.css'
 
 const LoginForm = () => {
     const [username, setUsername] = useState('') 
@@ -24,7 +28,8 @@ const LoginForm = () => {
           sessionService.setToken(user.token)
           setUsername('')
           setPassword('')
-          dispatch(loginUser(user)) 
+          dispatch(loginUser(user))
+          dispatch(resetSession())
           
         } catch (exception) {
           setUsername('')
@@ -32,32 +37,55 @@ const LoginForm = () => {
           console.log('login failed')
         }
       }
-
+      
       return (
-          <div className='login-container'>
-            <form onSubmit={handleLogin}>
-                <div className='login-item'>
-                    username
-                    <input
-                        type='text'
-                        value={ username }
-                        name='Username'
-                        onChange={({ target }) => setUsername(target.value)}
-                    />
-                </div>
-                <div className='login-item'>
-                    password
-                    <input
-                        type='password'
-                        value={ password }
-                        name='Password'
-                        onChange={({ target }) => setPassword(target.value)}
-                    />
-                </div>
-                <button type="submit">login</button>
-            </form>       
-          </div>
-      )
+        <SubPage>
+          <FormLogin onSubmit={handleLogin}>
+            <FormRow>
+              <FormLabel>username:</FormLabel>
+              <FormInput 
+                type='text'
+                value={ username }
+                name='Username'
+                onChange={({ target }) => setUsername(target.value)}
+              />
+              <FormLabel>password:</FormLabel>
+              <FormInput 
+                type='password'
+                value={ password }
+                name='Password'
+                onChange={({ target }) => setPassword(target.value)}
+              />
+            </FormRow>
+              <StyledButton type="submit">login</StyledButton>
+          </FormLogin>       
+        </SubPage>
+    )
+      // return (
+      //     <div className='login-container'>
+      //       <form onSubmit={handleLogin}>
+      //           <div className='login-item'>
+      //               username
+      //               <input
+      //                   type='text'
+      //                   value={ username }
+      //                   name='Username'
+      //                   onChange={({ target }) => setUsername(target.value)}
+      //               />
+      //           </div>
+      //           <div className='login-item'>
+      //               password
+      //               <input
+      //                   type='password'
+      //                   value={ password }
+      //                   name='Password'
+      //                   onChange={({ target }) => setPassword(target.value)}
+      //               />
+      //           </div>
+      //           <button type="submit">login</button>
+      //       </form>       
+      //     </div>
+      // )
 }
 
 export default LoginForm
