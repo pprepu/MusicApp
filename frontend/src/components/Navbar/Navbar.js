@@ -20,6 +20,8 @@ import LoginForm from '../../components/LoginForm'
 
 import { logoutUser } from '../../reducers/userReducer'
 import { visitUserpage, resetSession, startSettings, visitLoginpage } from '../../reducers/sessionReducer'
+import { resetScales } from '../../reducers/scaleReducer'
+import { resetIntervals } from '../../reducers/intervalReducer'
 
 
 const Navbar = () => {
@@ -58,6 +60,8 @@ const Navbar = () => {
 
     const startPractice = () => {
         dispatch(resetSession())
+        dispatch(resetScales())
+        dispatch(resetIntervals())
         dispatch(startSettings())
     }
 
@@ -86,7 +90,7 @@ const Navbar = () => {
                         {user ? (
                             <>
                                 <NavbarItem>
-                                    <NavLinks>
+                                    <NavLinks onClick={() => dispatch(visitUserpage())}>
                                         User
                                     </NavLinks>
                                 </NavbarItem>

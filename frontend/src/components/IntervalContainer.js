@@ -7,8 +7,11 @@ import sessionService from '../services/sessions'
 
 import { answerCorrect, answerWrong, endSession } from '../reducers/sessionReducer.js'
 
+import { SubPage, Text, StyledButton } from '../globalStyles'
+import { SessionContainer, ImageContainer, AnswerContainer, ImageItem, AnswerButton } from './IntervalContainer.elements'
 
-import './IntervalContainer.css'
+
+// import './IntervalContainer.css'
 
 import images from '../services/images'
 
@@ -30,38 +33,7 @@ const IntervalContainer = () => {
     const intervalsInApp = useSelector(state => state.intervals)
     const dispatch = useDispatch()
 
-    const INTERVALS_PER_SESSION = 5
-
-    // const setRandomNotes = () => {
-    //     if (scalesInApp.length ===  0) {
-    //       console.log('setRandomNotes() needs state.scales to not be empty')
-    //       return 'No scales shown'
-    //     }
-    
-    
-    //     const randomScaleChosen = scalesInApp[Math.floor(Math.random() * Math.floor(scalesInApp.length))]
-    //     setCurrentScale(randomScaleChosen)
-    //     setNote1(noteService.getRandomNoteFromScale(randomScaleChosen))
-    //     setNote2(noteService.getRandomNoteFromScale(randomScaleChosen))
-    //   }
-
-    // const findInterval = () => {
-    //     if (note1 === '' || note2 === '' || currentScale === '') {
-    //       return
-    //     }
-    
-    //     setCurrentInterval(intervalService.findIntervalForMajor(note1, note2, currentScale))
-        
-    //   }
-      
-    //   const findAllIntervals = () => {
-    //     if (!currentInterval) {
-    //       return
-    //     }
-
-    //     setAllIntervals(intervalService.generateAllIntervals(currentInterval))
-    //   }
-      // tähän yhdistetty ylläolevat funktiot
+    const INTERVALS_PER_SESSION = 2
 
       const askForInterval = () => {
 
@@ -126,36 +98,77 @@ const IntervalContainer = () => {
       }
       
     }
-    
+
     return (
-        <div className='interval-container'>
-          <div className='session-container'>
-            <p>Correct answers: {currentSession.answersCorrect} </p>
-            <p>Wrong answers: {currentSession.answersWrong}</p>
-          </div>
-          <div className='image-container'>
-            <img className='image-item image-item-1' src={images.clefs.g[modifyScaleName(currentScale)]} alt='c-maj' /><img className='image-item' src={images.notes[modifyNoteName(note1)]} alt='F-1' /><img className='image-item' src={images.notes[modifyNoteName(note2)]} alt='F-1' />
-          </div>
-          <div className='note-container'>
-            <div>note 1: {note1}</div>
-            <div>note 2: {note2}</div>
-          </div>
+      <SubPage>
+        <SessionContainer>
+          <Text>Correct answers: {currentSession.answersCorrect} </Text>
+          <Text>Wrong answers: {currentSession.answersWrong}</Text>
+        </SessionContainer>
+        <ImageContainer>
+          <ImageItem src={images.clefs.g[modifyScaleName(currentScale)]} alt={ modifyScaleName(currentScale) } />
+          <ImageItem src={images.notes[modifyNoteName(note1)]} alt={ modifyNoteName(note1) } />
+          <ImageItem src={images.notes[modifyNoteName(note2)]} alt={ modifyNoteName(note2) } />
+        </ImageContainer>
+        {/* <div className='note-container'>
+          <div>note 1: {note1}</div>
+          <div>note 2: {note2}</div>
+        </div> */}
+          
+        <AnswerContainer>
+             {/* {allIntervals.map(interval => answer !== interval 
+              ? <button className='answer-button' onClick={() => setAnswer(interval)} key={interval}>{interval}</button>
+              : <button className='answer-button answer-button-answered' onClick={() => setAnswer(interval)} key={interval}>{interval}</button>)
+              }  */}
+            { allIntervals.map(interval => 
+              <AnswerButton hasAnswered={hasAnswered} 
+                isCorrect={interval === currentInterval}
+                userCorrect={answer === currentInterval}
+                isToggled={answer === interval} 
+                onClick={() => setAnswer(interval)} key={interval}>
+                {interval}
+              </AnswerButton>
+            )}
+        </AnswerContainer>
+          {hasAnswered 
+            ? currentSession.answersCorrect + currentSession.answersWrong < INTERVALS_PER_SESSION 
+              ? <StyledButton onClick={() => askForInterval()}>next Interval</StyledButton>
+              : <StyledButton big fontBig onClick={() => finishSession()}>end session</StyledButton>
+            : answer && <StyledButton onClick={() => giveAnswer(answer)}>answer</StyledButton>
+          }
+          
+      </SubPage>
+  )
+    
+    // return (
+    //     <div className='interval-container'>
+    //       <div className='session-container'>
+    //         <p>Correct answers: {currentSession.answersCorrect} </p>
+    //         <p>Wrong answers: {currentSession.answersWrong}</p>
+    //       </div>
+    //       <div className='image-container'>
+    //         <img className='image-item image-item-1' src={images.clefs.g[modifyScaleName(currentScale)]} alt='c-maj' /><img className='image-item' src={images.notes[modifyNoteName(note1)]} alt='F-1' /><img className='image-item' src={images.notes[modifyNoteName(note2)]} alt='F-1' />
+    //       </div>
+    //       <div className='note-container'>
+    //         <div>note 1: {note1}</div>
+    //         <div>note 2: {note2}</div>
+    //       </div>
             
-          <div className='answer-container'>
-              {allIntervals.map(interval => answer !== interval 
-                ? <button className='answer-button' onClick={() => setAnswer(interval)} key={interval}>{interval}</button>
-                : <button className='answer-button answer-button-answered' onClick={() => setAnswer(interval)} key={interval}>{interval}</button>)
-              }
-          </div>
-            {hasAnswered 
-              ? currentSession.answersCorrect + currentSession.answersWrong < INTERVALS_PER_SESSION 
-                ? <button onClick={() => askForInterval()}>next Interval</button>
-                : <button onClick={() => finishSession()}>end session</button>
-              : answer && <button onClick={() => giveAnswer(answer)}>answer</button>
-            }
+    //       <div className='answer-container'>
+    //           {allIntervals.map(interval => answer !== interval 
+    //             ? <button className='answer-button' onClick={() => setAnswer(interval)} key={interval}>{interval}</button>
+    //             : <button className='answer-button answer-button-answered' onClick={() => setAnswer(interval)} key={interval}>{interval}</button>)
+    //           }
+    //       </div>
+    //         {hasAnswered 
+    //           ? currentSession.answersCorrect + currentSession.answersWrong < INTERVALS_PER_SESSION 
+    //             ? <button onClick={() => askForInterval()}>next Interval</button>
+    //             : <button onClick={() => finishSession()}>end session</button>
+    //           : answer && <button onClick={() => giveAnswer(answer)}>answer</button>
+    //         }
             
-        </div>
-    )
+    //     </div>
+    // )
 }
 
 export default IntervalContainer

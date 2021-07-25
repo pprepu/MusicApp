@@ -15,12 +15,12 @@ const ScaleItem = ({ scale, handleClick, isToggled }) => {
         let [bassNote,] = scale.split("-")
         bassNote = bassNote.replace('Sharp', '#')
         bassNote = Array.prototype.map.call(bassNote, (char, index) => index === 0 ? char.toUpperCase() : char)
-        return bassNote
+        return bassNote.join("")
     }
 
     return (
             <OptionItem
-                isOn={isToggled} 
+                isToggled={isToggled}
                 onClick={handleClick}>
                     {formatScale(scale)}
             </OptionItem> 
@@ -31,7 +31,7 @@ const IntervalItem = ({ interval, handleClick, isToggled }) => {
 
     return (
             <OptionItem
-                isOn={isToggled} 
+                isToggled={isToggled} 
                 onClick={handleClick}>
                     {interval}
             </OptionItem> 
@@ -76,8 +76,8 @@ const ScaleList = ( { scales, intervals } ) => {
                 Choose the scales you want to get the notes from:
             </Text>
             <ScaleContainer>
-                <ScaleButton isOn={firstRun[0] ? false : allScalesChosen ? true : false} onClick={() => chooseAllScales()}>all majors</ScaleButton>
-                <ScaleButton isOn={!allScalesChosen ? true : false} onClick={() => chooseSpecificScales()}>specific majors</ScaleButton>
+                <ScaleButton isToggled={firstRun[0] ? false : allScalesChosen ? true : false} onClick={() => chooseAllScales()}>all majors</ScaleButton>
+                <ScaleButton isToggled={!allScalesChosen ? true : false} onClick={() => chooseSpecificScales()}>specific majors</ScaleButton>
             </ScaleContainer>
             {!allScalesChosen && <OptionList>
                 {scales.map(scale => 
@@ -103,11 +103,11 @@ const ScaleList = ( { scales, intervals } ) => {
             </OptionList>}
             
                 <Text>
-                    Choose the Intervals you want to practice (at least 2):
+                    Choose the intervals you want to practice (at least 2):
                 </Text>
             <ScaleContainer>          
-                <ScaleButton isOn={firstRun[1] ? false : allIntervalsChosen ? true : false} onClick={() => chooseAllIntervals()}>all intervals</ScaleButton>
-                <ScaleButton isOn={!allIntervalsChosen ? true : false} onClick={() => chooseSpecificIntervals()}>specific intervals</ScaleButton>
+                <ScaleButton isToggled={firstRun[1] ? false : allIntervalsChosen ? true : false} onClick={() => chooseAllIntervals()}>all intervals</ScaleButton>
+                <ScaleButton isToggled={!allIntervalsChosen ? true : false} onClick={() => chooseSpecificIntervals()}>specific intervals</ScaleButton>
             </ScaleContainer>
             <OptionList>
                 {!allIntervalsChosen && intervals.map(interval => 

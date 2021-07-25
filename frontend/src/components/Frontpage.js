@@ -24,7 +24,8 @@ const Frontpage = () => {
             </TextParagraph>
             <TextParagraph>
                 If you want to read a more detailed description about not only the app, but the technologies used in its creation, 
-                the About-page contains all this information.
+                the About-page contains all this information. Also, the practice -link in the navbar will start your journey towards 
+                better musical understanding.
             </TextParagraph>
             <TextParagraph>
                 Enjoy your visit!

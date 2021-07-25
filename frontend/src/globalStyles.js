@@ -2,17 +2,17 @@ import styled, { createGlobalStyle } from 'styled-components'
 import Roboto from './fonts/Roboto-Light-webfont.woff'
 const GlobalStyle = createGlobalStyle`
 
-@font-face {
-    font-family: 'Roboto';
-    src: url(${Roboto}) format('woff');
-}
+    @font-face {
+        font-family: 'Roboto';
+        src: url(${Roboto}) format('woff');
+    }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto';
-}
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto';
+    }
 `
 
 export const Container = styled.div`
@@ -74,15 +74,22 @@ export const Page = styled.div`
     /* width: 900px; */
     font-size: 18px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `
 
 export const SubPage = styled.div`
-    margin: auto;
+    /* margin: auto; */
+    max-width: 1300px;
     width: 900px;
     margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     @media screen and (max-width: 960px) {
-        width: 750px;
+        width: 650px;
     }
 `
 
@@ -130,6 +137,7 @@ export const FormLabel = styled.label`
 `
 
 export const TextParagraph = styled.p`
+    /* align-self: left; */
     text-align: left;
     margin: 25px;
 
@@ -143,6 +151,7 @@ export const Text = styled.p`
 
     @media screen and (max-width: 960px) {
         width: 70%;
+        margin: 10px 15px 10px 10px;
     }
 `
 

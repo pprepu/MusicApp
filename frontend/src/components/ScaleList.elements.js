@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { Button, Container, StyledButton } from '../globalStyles'
 
 export const ScaleButton = styled(Button)`
-    background-color: ${({ isOn }) => isOn ? 'grey' : 'white'};
+    background-color: ${({ isToggled }) => isToggled ? 'grey' : 'white'};
 `
 
 export const ScaleContainer = styled(Container)`
@@ -29,7 +29,7 @@ export const OptionItem = styled.button`
     width: 19%;
     margin-bottom: 10px;
     margin-right: 5px;
-    background-color: ${({ isOn }) => isOn ? 'grey' : 'white'};
+    background-color: ${({ isToggled }) => isToggled ? 'grey' : 'white'};
 
     &:hover {
         transition: all 0.3s ease-out;
