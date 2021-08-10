@@ -1,13 +1,8 @@
-
-import styled from "styled-components"
+import styled from 'styled-components'
 
 export const Table = styled.table`
 
     width: 850px;
-    /* display: flex; */
-`
-
-export const TableBody = styled.tbody`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,9 +26,8 @@ export const TableRow = styled.tr`
     }
 `
 
-export const TableText = styled.td`
+export const TableText = styled.p`
     margin-left: 20px;
     margin-right: 20px;
     font-size: ${({ size }) => !size ? '' : size > 8 ? '10px' : '14px' }
-    
 `

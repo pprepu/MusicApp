@@ -6,7 +6,7 @@ import { resetIntervals } from '../reducers/intervalReducer.js'
 
 import { SubPage, Button } from '../globalStyles'
 // import './SessionSummary.css'
-import { Table, TableRow, TableText } from './SessionSummary.elements'
+import { Table, TableBody, TableRow, TableText } from './SessionSummary.elements'
 
 export const SummaryItem = ({ correct, answer, correctAnswer }) => {
     const [hover, setHover] = useState(false)
@@ -80,42 +80,44 @@ const SessionSummary = () => {
     return (
         <SubPage>
             <Table>
-                <TableRow header>
-                    <TableText>Exercise information</TableText>
-                </TableRow>
-                <TableRow>
-                    <TableText>Type</TableText>
-                    <TableText>Interval identification</TableText>
-                </TableRow>
-                <TableRow>
-                    <TableText>Score</TableText>
-                    <TableText>
-                        { currentSession.answersCorrect}/{currentSession.answersCorrect + currentSession.answersWrong } &nbsp;- &nbsp;
-                        { Number(currentSession.answersCorrect)/(Number(currentSession.answersCorrect) + Number(currentSession.answersWrong)) * 100 }%
-                    </TableText>
-                </TableRow>
-                <TableRow header>
-                    <TableText>Settings</TableText>
-                </TableRow>
-                <TableRow>
-                    <TableText>Clefs</TableText>
-                    <TableText>Treble</TableText>
-                </TableRow>
-                <TableRow>
-                    <TableText>Scales</TableText>
-                    <TableText>
-                        { currentScales.map((scale, i) => formatScale(scale) + (i !== currentScales.length - 1 ? ', ' : ''))}
-                    </TableText>
-                </TableRow>
-                <TableRow>
-                    <TableText>Intervals</TableText>
-                    <TableText size={currentIntervals.length}>
-                        { currentIntervals.map((interval, i) => interval + (i !== currentIntervals.length - 1 ? ', ' : ''))}
-                    </TableText>
-                </TableRow>
-                <TableRow header last>
-                    <TableText></TableText>
-                </TableRow>
+                <TableBody>
+                    <TableRow header>
+                        <TableText>Exercise information</TableText>
+                    </TableRow>
+                    <TableRow>
+                        <TableText>Type</TableText>
+                        <TableText>Interval identification</TableText>
+                    </TableRow>
+                    <TableRow>
+                        <TableText>Score</TableText>
+                        <TableText>
+                            { currentSession.answersCorrect}/{currentSession.answersCorrect + currentSession.answersWrong } &nbsp;- &nbsp;
+                            { Number(currentSession.answersCorrect)/(Number(currentSession.answersCorrect) + Number(currentSession.answersWrong)) * 100 }%
+                        </TableText>
+                    </TableRow>
+                    <TableRow header>
+                        <TableText>Settings</TableText>
+                    </TableRow>
+                    <TableRow>
+                        <TableText>Clefs</TableText>
+                        <TableText>Treble</TableText>
+                    </TableRow>
+                    <TableRow>
+                        <TableText>Scales</TableText>
+                        <TableText>
+                            { currentScales.map((scale, i) => formatScale(scale) + (i !== currentScales.length - 1 ? ', ' : ''))}
+                        </TableText>
+                    </TableRow>
+                    <TableRow>
+                        <TableText>Intervals</TableText>
+                        <TableText size={currentIntervals.length}>
+                            { currentIntervals.map((interval, i) => interval + (i !== currentIntervals.length - 1 ? ', ' : ''))}
+                        </TableText>
+                    </TableRow>
+                    <TableRow header last>
+                        <TableText></TableText>
+                    </TableRow>
+                </TableBody>
             </Table>
             {/* <Button onClick={() => console.log(currentScales)}>debug</Button> */}
         </SubPage>

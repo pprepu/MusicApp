@@ -3,6 +3,7 @@ import { useSelector, useDispatch, ReactReduxContext } from 'react-redux'
 // import './App.css'
 
 import noteService from './services/notes'
+import sessionService from './services/sessions'
 import { allIntervals } from './services/intervals'
 
 import ScaleList from './components/ScaleList'
@@ -29,6 +30,7 @@ const App = () => {
     const loggedUserJSON = window.localStorage.getItem('musicappUserLoggedIn')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
+      sessionService.setToken(user.token)
       dispatch(loginUser(user))
     } else {
       dispatch(resetSession())

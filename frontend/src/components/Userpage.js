@@ -4,7 +4,10 @@ import { resetSession } from '../reducers/sessionReducer'
 import { resetScales } from '../reducers/scaleReducer.js'
 import { resetIntervals } from '../reducers/intervalReducer.js'
 import userService from '../services/users'
-import { SubPage, Container, Text } from '../globalStyles' 
+import generalService from '../services/general'
+import { SubPage, Container, Text } from '../globalStyles'
+
+import { Table, TableBody, TableRow, TableText } from './SessionSummary.elements'
 
 // import './Userpage.css'
 // import { SummaryItem } from './SessionSummary'
@@ -57,8 +60,30 @@ const Userpage = () => {
     return (
         <SubPage>
             <Container>
-                <Text>
+                <Text>  
                     userpage?
+                    <Table>
+                        <TableBody>
+                            <TableRow header>
+                                <TableText>
+                                    Sessions:
+                                </TableText>
+                            </TableRow>
+                            { sessions.map(session => (
+                                <TableRow>
+                                    <TableText>
+                                        { generalService.formatDate(session.date) }
+                                    </TableText>
+                                    <TableText>
+                                        { session.sessionType }
+                                    </TableText>
+                                    <TableText>
+                                        { session.answersCorrect } / { session.answersCorrect + session.answersWrong }
+                                    </TableText>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
                 </Text>
             </Container>
         </SubPage>
