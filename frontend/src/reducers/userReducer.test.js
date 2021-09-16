@@ -24,6 +24,7 @@ describe('userReducer', () => {
 
     const newState = userReducer(state, action)
 
-    expect(newState).toBe(null)
+    expect(newState).toBeNull()
   })
 })
+

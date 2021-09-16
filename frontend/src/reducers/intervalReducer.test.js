@@ -31,6 +31,7 @@ describe('intervalReducer', () => {
             expect(newState).toContain(interval)
         }
         expect(newState.length).toBe(3)
+        expect(newState.length).toBe(state.length + action.data.length)
     })
 
     test('action REMOVE_INTERVAL removes the correct interval from the state', () => {

@@ -12,3 +12,11 @@ export const FormLogin = styled.form`
         width: 80%;
     }
 `
+
+export const ErrorMessage = styled.p`
+
+    font-size: 16px;
+    color: #FF6347;
+    height: 16px;
+    margin: 20px;
+`

@@ -130,7 +130,7 @@ const IntervalContainer = () => {
               </AnswerButton>
             )}
         </AnswerContainer>
-          {hasAnswered 
+          { hasAnswered 
             ? currentSession.answersCorrect + currentSession.answersWrong < INTERVALS_PER_SESSION 
               ? <StyledButton onClick={() => askForInterval()}>next Interval</StyledButton>
               : <StyledButton big fontBig onClick={() => finishSession()}>end session</StyledButton>

@@ -4,7 +4,7 @@ import { initialState } from './scaleReducer'
 
 describe('scaleReducer', () => {
   test('action ADD_SCALE adds a scale to the state', () => {
-    const state = initialState
+    const state = [ ...initialState ]
     const action = {
       type: 'ADD_SCALE',
       data: 'g-maj'
@@ -29,11 +29,8 @@ describe('scaleReducer', () => {
     deepFreeze(state)
     const newState = scaleReducer(state, action)
 
-    // console.log(state)
-    // console.log(newState)
-
     expect(newState).not.toContain('c-maj')
-    expect(newState.length).toBe(2)
+    expect(newState.length).toBe(state.length - 1)
     
   })
 
@@ -52,6 +49,7 @@ describe('scaleReducer', () => {
     }
 
     expect(newState.length).toBe(5)
+    expect(newState.length).toBe(state.length + action.data.length)
     
   })
 

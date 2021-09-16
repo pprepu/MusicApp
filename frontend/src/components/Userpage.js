@@ -36,6 +36,7 @@ import { Table, TableBody, TableRow, TableText } from './SessionSummary.elements
 const Userpage = () => {
 
     const [sessions, setSessions] = useState([])
+    const [showSessions, setShowSessions] = useState(false)
 
     const dispatch = useDispatch()
     const user = useSelector(state => state.user)
@@ -62,15 +63,18 @@ const Userpage = () => {
             <Container>
                 <Text>  
                     userpage?
+                </Text>
+                { showSessions ? 
+                    (
                     <Table>
                         <TableBody>
-                            <TableRow header>
+                            <TableRow header clickable onClick={() => setShowSessions(!showSessions)}>
                                 <TableText>
                                     Sessions:
                                 </TableText>
                             </TableRow>
                             { sessions.map(session => (
-                                <TableRow>
+                                <TableRow key={session.date}>
                                     <TableText>
                                         { generalService.formatDate(session.date) }
                                     </TableText>
@@ -84,7 +88,13 @@ const Userpage = () => {
                             ))}
                         </TableBody>
                     </Table>
-                </Text>
+                    ) :
+                    (
+                    <Text onClick={() => setShowSessions(!showSessions)}>
+                        Show sessions
+                    </Text>
+                    )
+                }
             </Container>
         </SubPage>
     )

@@ -65,6 +65,10 @@ const sessionReducer = (state = initialSession, action) => {
             return { ...state, currentPage: 'userPage' }
         case 'VISIT_LOGINPAGE':
             return { ...state, currentPage: 'login' }
+        case 'VISIT_SIGNUP':
+            return { ...state, currentPage: 'signup' }
+        case 'VISIT_ABOUT':
+            return { ...state, currentPage: 'about'}
         default:
             return state
     }
@@ -102,6 +106,12 @@ export const visitLoginpage = () => {
     return { type: 'VISIT_LOGINPAGE' }
 }
 
+export const visitSignup = () => {
+    return { type: 'VISIT_SIGNUP' }
+}
 
+export const visitAbout = () => {
+    return { type: 'VISIT_ABOUT' }
+}
 
 export default sessionReducer

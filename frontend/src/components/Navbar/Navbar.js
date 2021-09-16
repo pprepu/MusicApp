@@ -19,7 +19,7 @@ import { StyledButton } from '../../globalStyles'
 import LoginForm from '../../components/LoginForm'
 
 import { logoutUser } from '../../reducers/userReducer'
-import { visitUserpage, resetSession, startSettings, visitLoginpage } from '../../reducers/sessionReducer'
+import { visitUserpage, resetSession, startSettings, visitLoginpage, visitSignup, visitAbout } from '../../reducers/sessionReducer'
 import { resetScales } from '../../reducers/scaleReducer'
 import { resetIntervals } from '../../reducers/intervalReducer'
 
@@ -83,7 +83,7 @@ const Navbar = () => {
                             </NavLinks>
                         </NavbarItem>
                         <NavbarItem>
-                            <NavLinks>
+                            <NavLinks onClick={ () => dispatch(visitAbout()) }>
                                 About
                             </NavLinks>
                         </NavbarItem>
@@ -111,11 +111,11 @@ const Navbar = () => {
                                 <NavItemBtn>
                                     { button ? (
                                         <NavBtnLink >
-                                            <StyledButton primary>Sign up</StyledButton>
+                                            <StyledButton onClick={() => dispatch(visitSignup())} primary>Sign up</StyledButton>
                                         </NavBtnLink>
                                     ) : (
                                         <NavBtnLink>
-                                            <StyledButton onClick={() => console.log('bleh')} fontBig primary>
+                                            <StyledButton onClick={() => dispatch(visitSignup())} fontBig primary>
                                                 Sign up
                                             </StyledButton>
                                         </NavBtnLink>

@@ -12,7 +12,9 @@ import SessionSummary from './components/SessionSummary'
 import Frontpage from './components/Frontpage'
 import LoginForm from './components/LoginForm'
 import Userpage from './components/Userpage'
+import Signup from './components/Signup'
 import Navbar from './components/Navbar/Navbar'
+import Aboutpage from './components/Aboutpage'
 import GlobalStyle, { Button, Page, StyledButton } from './globalStyles'
 
 import { loginUser, logoutUser } from './reducers/userReducer'
@@ -59,12 +61,14 @@ const App = () => {
     <Page>
       <GlobalStyle />
       <Navbar />
-      {currentSession.currentPage === 'login' && <LoginForm />}
-      {currentSession.currentPage === 'front' && <Frontpage />}
-      {currentSession.currentPage === 'intervalQuestions' && <IntervalContainer />}
-      {currentSession.currentPage === 'intervalSettings' && <ScaleList scales={choosableScales} intervals={allIntervals}/>}
-      {currentSession.currentPage === 'intervalSummary' && <SessionSummary />}
-      {currentSession.currentPage === 'userPage' && <Userpage />}
+      { currentSession.currentPage === 'login' && <LoginForm /> }
+      { currentSession.currentPage === 'front' && <Frontpage /> }
+      { currentSession.currentPage === 'intervalQuestions' && <IntervalContainer /> }
+      { currentSession.currentPage === 'intervalSettings' && <ScaleList scales={choosableScales} intervals={allIntervals}/> }
+      { currentSession.currentPage === 'intervalSummary' && <SessionSummary /> }
+      { currentSession.currentPage === 'userPage' && <Userpage /> }
+      { currentSession.currentPage === 'signup' && <Signup /> }
+      { currentSession.currentPage === 'about' && <Aboutpage /> }
       
       {/* <div>
         <StyledButton fontBig big onClick={() => console.log(currentSession, '---', currentIntervals, '---', user)}>debug</StyledButton>

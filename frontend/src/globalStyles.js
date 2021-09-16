@@ -98,13 +98,13 @@ export const FormRow = styled.div`
     display: flex;
     justify-content: flex-start;
     flex-direction: row;
-    align-items: flex-start;
-    margin-bottom: 20px;
+    align-items: 'flex-start';
+    margin-bottom: ${({ hasErrorText }) => hasErrorText ? '5px' : '20px'};
     flex-wrap: wrap;
 
     @media screen and (max-width: 960px) {
         
-        margin-bottom: 40px;
+        margin-bottom: ${({ hasErrorText }) => hasErrorText ? '5px' : '40px'};
         flex-direction: column;
         
     }

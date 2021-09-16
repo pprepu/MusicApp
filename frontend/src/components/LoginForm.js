@@ -6,12 +6,14 @@ import loginService from '../services/login'
 import sessionService from '../services/sessions'
 
 import { FormRow, FormInput, FormLabel, StyledButton, SubPage } from '../globalStyles'
-import { FormLogin } from './LoginForm.elements'
+import { FormLogin, ErrorMessage } from './LoginForm.elements'
+// import { ErrorText } from './Signup.elements'
 // import './LoginForm.css'
 
 const LoginForm = () => {
     const [username, setUsername] = useState('') 
-    const [password, setPassword] = useState('') 
+    const [password, setPassword] = useState('')
+    const [showErrorMessage, setShowErrorMessage] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -34,12 +36,17 @@ const LoginForm = () => {
         } catch (exception) {
           setUsername('')
           setPassword('')
+          setShowErrorMessage(true)
+                setTimeout(() => setShowErrorMessage(false), 4000)
           console.log('login failed')
         }
       }
       
       return (
         <SubPage>
+          <ErrorMessage>
+            { showErrorMessage ? 'Login failed' : '' }
+          </ErrorMessage>
           <FormLogin onSubmit={handleLogin}>
             <FormRow>
               <FormLabel>username:</FormLabel>

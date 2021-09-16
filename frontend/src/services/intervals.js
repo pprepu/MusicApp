@@ -1,4 +1,5 @@
 import noteService from './notes'
+import generalService from './general'
 
 const HIGHEST_INTERVAL_DISTANCE = 12
 
@@ -117,53 +118,34 @@ const distanceForTwoNotes = (note1, note2, notes) => {
     return Math.abs(indexOfNote1 - indexOfNote2)
 }
 
-// hmm... should this be in another file/service? should it be named shuffleArrayInPlace?
-const shuffleArray = array => {
-    let currentIndex = array.length
-    let randomIndex, placeholder
-
-    while (currentIndex !== 0) {
-
-        randomIndex = Math.floor(Math.random() * currentIndex)
-        currentIndex -= 1
-    
-        placeholder = array[currentIndex]
-        array[currentIndex] = array[randomIndex]
-        array[randomIndex] = placeholder
-
-      }
-    
-      //should this return anything?
-      //return array
-}
-
 // correct interval IS CURRENTLY added to returned array as well...
+// what if user wants create more intervals than the argument of received intervals contains? check how returnedIntervals works... I think it's ok?
 const generateAllIntervals = (correctInterval, allIntervalsReceived, generatedIntervals = 6) => {
     correctInterval = correctInterval.toLowerCase()
     const distanceOfCorrectInterval = intervalToDistance(correctInterval)
     // console.log('allIntervalsReceived:', allIntervalsReceived)
 
     if (distanceOfCorrectInterval === '') {
-        console.log(correctInterval)
+        // console.log(correctInterval)
         throw new Error('generatedOtherInterval called with an incorrect correctInterval parameter')
     }
 
-    if (generatedIntervals >= HIGHEST_INTERVAL_DISTANCE - 1 || generatedIntervals < 0) {
+    if (generatedIntervals >= HIGHEST_INTERVAL_DISTANCE - 1 || generatedIntervals < 1) {
         throw new Error('generatedOtherInterval called with an incorrect generatedIntervals parameter')
     }
     // tee allIntervalsista defaultti, jossa kaikki, sit voit poistaa allaolevan taulukon luomisen
     // lisää maholliseksi parametriksi "kaikki maholliset intervallit" sisältävä taulukko, joka korvaa mahd. defaultin
 
     let allIntervalsReceivedCopy = allIntervalsReceived.filter(interval => interval !== correctInterval)
-    shuffleArray(allIntervalsReceivedCopy)
+    generalService.shuffleArrayInPlace(allIntervalsReceivedCopy)
     // console.log('allIntervalsReceived after filtering:', allIntervalsReceivedCopy)
 
-    let returnedIntervals = allIntervalsReceivedCopy.length >= generatedIntervals - 1
+    let returnedIntervals = allIntervalsReceivedCopy.length >= generatedIntervals - 1   // subtract 1, because correct interval will be pushed in
                                 ? allIntervalsReceivedCopy.slice(0 , generatedIntervals - 1)
                                 : allIntervalsReceivedCopy
     
     returnedIntervals.push(correctInterval)
-    shuffleArray(returnedIntervals)
+    generalService.shuffleArrayInPlace(returnedIntervals)
     return returnedIntervals
     // const allIntervals = []
 
