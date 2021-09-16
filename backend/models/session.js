@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
 var historyItemSchema = mongoose.Schema({
-  answer: String, 
-  correctAnswer: String 
+  answer: String,
+  correctAnswer: String
 }, { _id : false })
 
 const sessionSchema = mongoose.Schema({
@@ -10,9 +10,9 @@ const sessionSchema = mongoose.Schema({
   answersCorrect: Number,
   answersWrong: Number,
   sessionHistory: [ historyItemSchema ],
-  date: { 
-    type: Date, 
-    default: Date.now 
+  date: {
+    type: Date,
+    default: Date.now
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,

@@ -16,7 +16,7 @@ sessionRouter.post('/', async (req, res, next) => {
   const body = req.body
 
   if (!body.sessionType) {
-    return res.status(400).json({ 
+    return res.status(400).json({
       error: 'A session type must be provided'
     })
   }
@@ -47,9 +47,6 @@ sessionRouter.post('/', async (req, res, next) => {
   } catch (exception) {
     next(exception)
   }
-  
-  
-
   // let user = null
   // if (body.userId) {
   //   try {
@@ -64,9 +61,9 @@ sessionRouter.post('/', async (req, res, next) => {
   //     next(exception)
   //     return
   //   }
-    
+
   // }
-  
+
 })
 
 //lisää try-catch -->
@@ -76,10 +73,10 @@ sessionRouter.get('/', async (req, res) => {
     .populate('user', { username: 1 })
   res.json(sessions.map(session => session.toJSON()))
 })
-  
+
 //for debugging
 sessionRouter.get('/info', (req, res) => {
   res.send('<h1> SESSIONS COULD BE HERE? </h1>')
 })
-  
+
 module.exports = sessionRouter

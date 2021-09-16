@@ -28,10 +28,10 @@ describe('while there is a user in the database', () => {
     await User.deleteMany({})
 
     const passwordHash = await bcrypt.hash('secret_password', 10)
-    const user = new User({ 
+    const user = new User({
       username: 'tester',
-      name: 'First Tester', 
-      passwordHash 
+      name: 'First Tester',
+      passwordHash
     })
 
     await user.save()
@@ -53,7 +53,7 @@ describe('while there is a user in the database', () => {
       .expect('Content-Type', /application\/json/)
 
     const usersAtEnd = await helper.getUsers()
-    
+
     expect(usersAtEnd).toHaveLength(usersAtStart.length + 1)
 
     const usernames = usersAtEnd.map(user => user.username)
@@ -76,7 +76,7 @@ describe('while there is a user in the database', () => {
       .expect('Content-Type', /application\/json/)
 
     const usersAtEnd = await helper.getUsers()
-    
+
     expect(usersAtEnd).toHaveLength(usersAtStart.length + 1)
 
     const usernames = usersAtEnd.map(user => user.username)
@@ -101,7 +101,7 @@ describe('while there is a user in the database', () => {
     expect(result.body.error).toContain('Password must be at least 5 characters long')
 
     const usersAtEnd = await helper.getUsers()
-    
+
     expect(usersAtEnd).toHaveLength(usersAtStart.length)
 
     const usernames = usersAtEnd.map(user => user.username)
@@ -126,7 +126,7 @@ describe('while there is a user in the database', () => {
     expect(result.body.error).toContain('expected `username` to be unique')
 
     const usersAtEnd = await helper.getUsers()
-    
+
     expect(usersAtEnd).toHaveLength(usersAtStart.length)
   })
 
@@ -178,11 +178,11 @@ describe('while there is a user in the database', () => {
   })
 
   describe('a new session', () => {
-  
+
     test('can be created with a valid token', async () => {
-    
+
       const sessionsAtStart = await helper.getSessions()
-  
+
       const sessionToSend = {
         sessionType: 'interval',
         answersWrong: 0,
@@ -197,24 +197,24 @@ describe('while there is a user in the database', () => {
       }
 
       const loginResult = await loginUser()
-  
+
       const result = await api
         .post('/api/sessions')
         .send(sessionToSend)
         .set('Authorization', `bearer ${loginResult.body.token}`)
         .expect(200)
         .expect('Content-Type', /application\/json/)
-  
-      
+
+
       const sessionsAtEnd = await helper.getSessions()
-  
+
       expect(sessionsAtEnd).toHaveLength(sessionsAtStart.length + 1)
     })
 
     test('cannot be created without a valid token - no token sent', async () => {
-    
+
       const sessionsAtStart = await helper.getSessions()
-  
+
       const sessionToSend = {
         sessionType: 'interval',
         answersWrong: 0,
@@ -227,24 +227,24 @@ describe('while there is a user in the database', () => {
           { answer: 'perfect unison', correctAnswer : 'perfect unison' },
         ]
       }
-  
+
       const result = await api
         .post('/api/sessions')
         .send(sessionToSend)
         .expect(401)
         .expect('Content-Type', /application\/json/)
-  
-      
+
+
       const sessionsAtEnd = await helper.getSessions()
-  
+
       expect(sessionsAtEnd).toHaveLength(sessionsAtStart.length)
       expect(result.body.error).toContain('Invalid token')
     })
 
     test('cannot be created without a valid token - an incorrect token sent', async () => {
-    
+
       const sessionsAtStart = await helper.getSessions()
-  
+
       const sessionToSend = {
         sessionType: 'interval',
         answersWrong: 0,
@@ -257,17 +257,17 @@ describe('while there is a user in the database', () => {
           { answer: 'perfect unison', correctAnswer : 'perfect unison' },
         ]
       }
-  
+
       const result = await api
         .post('/api/sessions')
         .send(sessionToSend)
         .set('Authorization', 'thisIsNotAValidTokenRight')
         .expect(401)
         .expect('Content-Type', /application\/json/)
-  
-      
+
+
       const sessionsAtEnd = await helper.getSessions()
-  
+
       expect(sessionsAtEnd).toHaveLength(sessionsAtStart.length)
       expect(result.body.error).toContain('Invalid token')
     })

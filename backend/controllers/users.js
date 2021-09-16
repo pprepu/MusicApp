@@ -7,7 +7,7 @@ userRouter.post('/', async (req, res, next) => {
   const saltRounds = 10
 
   if (body.password.length < 5) {
-    return res.status(400).json({ 
+    return res.status(400).json({
       error: 'Password must be at least 5 characters long'
     })
   }
@@ -20,13 +20,13 @@ userRouter.post('/', async (req, res, next) => {
     passwordHash,
   })
 
-  try { 
+  try {
     const savedUser = await user.save()
     res.json(savedUser)
   } catch(exception) {
     next(exception)
   }
-  
+
 })
 
 //lisää try-catch -->
@@ -46,7 +46,7 @@ userRouter.get('/:id', async (req, res, next) => {
   } catch(exception) {
     next(exception)
   }
-  
+
   if (user) {
     res.json(user.toJSON())
   } else {
