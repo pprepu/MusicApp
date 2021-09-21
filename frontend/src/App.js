@@ -69,7 +69,7 @@ const App = () => {
       { currentSession.currentPage === 'userPage' && <Userpage /> }
       { currentSession.currentPage === 'signup' && <Signup /> }
       { currentSession.currentPage === 'about' && <Aboutpage /> }
-      
+
       {/* <div>
         <StyledButton fontBig big onClick={() => console.log(currentSession, '---', currentIntervals, '---', user)}>debug</StyledButton>
       </div> */}
@@ -93,7 +93,7 @@ const App = () => {
   //       {currentSession.currentPage === 'intervalSettings' && <ScaleList scales={choosableScales} intervals={allIntervals}/>}
   //       {currentSession.currentPage === 'intervalSummary' && <SessionSummary />}
   //       {currentSession.currentPage === 'userPage' && <Userpage />}
-        
+
   //       <div>
   //         <button className='debug-button' onClick={() => console.log(currentSession, '---', currentIntervals, '---', user)}>debug</button>
   //       </div>
@@ -132,9 +132,9 @@ const App = () => {
     }
 
     setCurrentInterval(intervalService.findIntervalForMajor(note1, note2, currentScale))
-    
+
   }
-  
+
   const findOtherIntervals = () => {
     if (!currentInterval) {
       return
@@ -151,7 +151,7 @@ const App = () => {
       <div>scales atm: {scalesInApp}</div>
       <div>
         <div>notes from scale: {currentScale}</div>
-        note 1: {note1}   note 2: {note2}   
+        note 1: {note1}   note 2: {note2}
         <button onClick={() => setRandomNotes()}>set notes</button>
       </div>
       <div>

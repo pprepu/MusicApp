@@ -1,6 +1,6 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components'
 
-import Roboto from './Roboto-Light-webfont.woff';
+import Roboto from './Roboto-Light-webfont.woff'
 // import NameOfYourFontWoff2 from './nameOfYourFont.woff2';
 
 export default createGlobalStyle`
@@ -11,4 +11,4 @@ export default createGlobalStyle`
         font-weight: 300;
         font-style: normal;
     }
-`;
+`

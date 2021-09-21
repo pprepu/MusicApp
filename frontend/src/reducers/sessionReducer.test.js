@@ -43,7 +43,7 @@ describe('sessionReducer', () => {
     expect(newState.sessionHistory.length).toBe(1)
     expect(newState.sessionHistory[0].answer).toBe('perfect unison')
     expect(newState.sessionHistory[0].correctAnswer).toBe('perfect unison')
-    
+
   })
 
   test('action ADD_WRONG adds an incorrect answer to the state and modifies the sessionhistory, but it does not affect other values', () => {
@@ -102,9 +102,9 @@ describe('sessionReducer', () => {
     expect(newState.answersCorrect).toBe(0)
     expect(newState.answersWrong).toBe(0)
     expect(newState.sessionHistory.length).toBe(0)
-    
+
   })
-  
+
 
   test('action END_SESSION changes the page to the correct one, but does not affect other values', () => {
     const state = {  ...stateMidSession }
@@ -120,7 +120,7 @@ describe('sessionReducer', () => {
     expect(newState.answersCorrect).toBe(stateMidSession.answersCorrect)
     expect(newState.answersWrong).toBe(stateMidSession.answersWrong)
     expect(newState.sessionHistory.length).toBe(stateMidSession.sessionHistory.length)
-    
+
   })
 
   test('action VISIT_USERPAGE changes the page to the correct one, but does not affect other values', () => {
@@ -137,7 +137,7 @@ describe('sessionReducer', () => {
     expect(newState.sessionType).toBe(stateMidSession.sessionType)
 
     expect(newState.sessionHistory.length).toBe(stateMidSession.sessionHistory.length)
-    
+
   })
 
   test('action VISIT_LOGINPAGE changes the page to the correct one, but does not affect other values', () => {
@@ -154,7 +154,7 @@ describe('sessionReducer', () => {
     expect(newState.answersCorrect).toBe(0)
     expect(newState.answersWrong).toBe(0)
     expect(newState.sessionHistory.length).toBe(0)
-    
+
   })
 
   test('action VISIT_SIGNUP changes the page to the correct one, but does not affect other values', () => {
@@ -171,9 +171,9 @@ describe('sessionReducer', () => {
     expect(newState.answersCorrect).toBe(0)
     expect(newState.answersWrong).toBe(0)
     expect(newState.sessionHistory.length).toBe(0)
-    
+
   })
-  
+
   test('action VISIT_ABOUT changes the page to the correct one, but does not affect other values', () => {
     const state = {  ...initialSession }
     const action = {
@@ -188,7 +188,7 @@ describe('sessionReducer', () => {
     expect(newState.answersCorrect).toBe(0)
     expect(newState.answersWrong).toBe(0)
     expect(newState.sessionHistory.length).toBe(0)
-    
+
   })
 
   test('action RESET_SESSION resets the session to original values', () => {

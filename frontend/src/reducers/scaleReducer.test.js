@@ -16,7 +16,7 @@ describe('scaleReducer', () => {
     expect(newState[0]).toBe('g-maj')
     expect(newState).toContain('g-maj')
     expect(newState.length).toBe(1)
-    
+
   })
 
   test('action REMOVE_SCALE removes the correct scale from the state', () => {
@@ -31,7 +31,7 @@ describe('scaleReducer', () => {
 
     expect(newState).not.toContain('c-maj')
     expect(newState.length).toBe(state.length - 1)
-    
+
   })
 
   test('action ADD_MULTIPLE_SCALES adds multiple scales to the state', () => {
@@ -50,7 +50,7 @@ describe('scaleReducer', () => {
 
     expect(newState.length).toBe(5)
     expect(newState.length).toBe(state.length + action.data.length)
-    
+
   })
 
   test('action RESET_SCALES removes all scales from the state', () => {

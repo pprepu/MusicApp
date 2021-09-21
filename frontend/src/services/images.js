@@ -32,15 +32,15 @@ import gb_maj from '../images/clefs/g/gb_maj.svg'
 import cb_maj from '../images/clefs/g/cb_maj.svg'
 
 export default {
-    notes: {
-        c_1, d_1, e_1, f_1, g_1, a_1, b_1,
-        c_2, d_2, e_2, f_2, g_2, a_2, b_2,
-        c_3
-    },
-    clefs: {
-        g: {
-            c_maj, g_maj, d_maj, a_maj, e_maj, b_maj, fSharp_maj, cSharp_maj,
-            f_maj, bb_maj, eb_maj, ab_maj, db_maj, gb_maj, cb_maj
-        }
+  notes: {
+    c_1, d_1, e_1, f_1, g_1, a_1, b_1,
+    c_2, d_2, e_2, f_2, g_2, a_2, b_2,
+    c_3
+  },
+  clefs: {
+    g: {
+      c_maj, g_maj, d_maj, a_maj, e_maj, b_maj, fSharp_maj, cSharp_maj,
+      f_maj, bb_maj, eb_maj, ab_maj, db_maj, gb_maj, cb_maj
     }
+  }
 }

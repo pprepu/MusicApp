@@ -1,5 +1,5 @@
-import styled from "styled-components"
-import { Container, SubPage, Button } from "../globalStyles"
+import styled from 'styled-components'
+import { Container, SubPage, Button } from '../globalStyles'
 
 export const SessionContainer = styled(Container)`
     display: flex;

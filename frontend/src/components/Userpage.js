@@ -20,11 +20,11 @@ import { Table, TableBody, TableRow, TableText } from './SessionSummary.elements
 //             <p>Correct: {session.answersCorrect}, Wrong: {session.answersWrong}</p>
 //             <button onClick={() => setVisible(!visible)}>{visible ? 'hide' : 'show' }</button>
 //             <div className='history-container'>
-//                 {visible && session.sessionHistory.map((question, index) => 
-//                     <SummaryItem 
-//                         key={index} 
-//                         correct={question.answer === question.correctAnswer} 
-//                         answer={question.answer} 
+//                 {visible && session.sessionHistory.map((question, index) =>
+//                     <SummaryItem
+//                         key={index}
+//                         correct={question.answer === question.correctAnswer}
+//                         answer={question.answer}
 //                         correctAnswer={question.correctAnswer}
 //                     />
 //                 )}
@@ -35,69 +35,69 @@ import { Table, TableBody, TableRow, TableText } from './SessionSummary.elements
 
 const Userpage = () => {
 
-    const [sessions, setSessions] = useState([])
-    const [showSessions, setShowSessions] = useState(false)
+  const [sessions, setSessions] = useState([])
+  const [showSessions, setShowSessions] = useState(false)
 
-    const dispatch = useDispatch()
-    const user = useSelector(state => state.user)
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.user)
 
-    useEffect(() => {
-        if (!user) {
-            return
-        }
-        userService.getUser(user.id).then(res => setSessions(res.sessions))
-    }, [user, user.id])
-
+  useEffect(() => {
     if (!user) {
-        return
+      return
     }
+    userService.getUser(user.id).then(res => setSessions(res.sessions))
+  }, [user, user.id])
 
-    const resetApp = () => {
-        dispatch(resetSession())
-        dispatch(resetScales())
-        dispatch(resetIntervals())
-    }
-    
-    return (
-        <SubPage>
-            <Container>
-                <Text>  
+  if (!user) {
+    return
+  }
+
+  const resetApp = () => {
+    dispatch(resetSession())
+    dispatch(resetScales())
+    dispatch(resetIntervals())
+  }
+
+  return (
+    <SubPage>
+      <Container>
+        <Text>
                     userpage?
-                </Text>
-                { showSessions ? 
-                    (
-                    <Table>
-                        <TableBody>
-                            <TableRow header clickable onClick={() => setShowSessions(!showSessions)}>
-                                <TableText>
+        </Text>
+        { showSessions ?
+          (
+            <Table>
+              <TableBody>
+                <TableRow header clickable onClick={() => setShowSessions(!showSessions)}>
+                  <TableText>
                                     Sessions:
-                                </TableText>
-                            </TableRow>
-                            { sessions.map(session => (
-                                <TableRow key={session.date}>
-                                    <TableText>
-                                        { generalService.formatDate(session.date) }
-                                    </TableText>
-                                    <TableText>
-                                        { session.sessionType }
-                                    </TableText>
-                                    <TableText>
-                                        { session.answersCorrect } / { session.answersCorrect + session.answersWrong }
-                                    </TableText>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                    ) :
-                    (
-                    <Text onClick={() => setShowSessions(!showSessions)}>
+                  </TableText>
+                </TableRow>
+                { sessions.map(session => (
+                  <TableRow key={session.date}>
+                    <TableText>
+                      { generalService.formatDate(session.date) }
+                    </TableText>
+                    <TableText>
+                      { session.sessionType }
+                    </TableText>
+                    <TableText>
+                      { session.answersCorrect } / { session.answersCorrect + session.answersWrong }
+                    </TableText>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          ) :
+          (
+            <Text onClick={() => setShowSessions(!showSessions)}>
                         Show sessions
-                    </Text>
-                    )
-                }
-            </Container>
-        </SubPage>
-    )
+            </Text>
+          )
+        }
+      </Container>
+    </SubPage>
+  )
 }
 
 export default Userpage
