@@ -6,18 +6,18 @@ import { prettyDOM } from '@testing-library/dom'  // for debugging
 import { Provider } from 'react-redux'
 import store from '../store'
 
-import LoginForm from './LoginForm'
+import SessionSummary from './SessionSummary'
 
 
 test('renders content', () => {
   const component = render(
     <Provider store={store}>
-      <LoginForm />
+      <SessionSummary />
     </Provider>
     
   )
 
   expect(component.container).toHaveTextContent(
-    'username:'
+    'Exercise information'
   )
 })

@@ -13,5 +13,5 @@ const createUser = async user => {
 
 export default {
   getUser,
-  createUser
+  createUser,
 }

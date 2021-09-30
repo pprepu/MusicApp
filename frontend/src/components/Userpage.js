@@ -8,6 +8,7 @@ import generalService from '../services/general'
 import { SubPage, Container, Text } from '../globalStyles'
 
 import { Table, TableBody, TableRow, TableText } from './SessionSummary.elements'
+import { TextContainer, TextRow, UserpageText } from './Userpage.elements'
 
 // import './Userpage.css'
 // import { SummaryItem } from './SessionSummary'
@@ -61,9 +62,29 @@ const Userpage = () => {
   return (
     <SubPage>
       <Container>
-        <Text>
-                    userpage?
-        </Text>
+        <TextContainer>
+          <TextRow>
+            <UserpageText bold>
+              username:
+            </UserpageText>
+            <UserpageText>
+              { user.username }
+            </UserpageText>
+          </TextRow>
+          { user.name && 
+            (
+            <TextRow>
+              <UserpageText bold>
+                name:
+              </UserpageText>
+              <UserpageText>
+                { user.name }
+              </UserpageText>
+            </TextRow>
+            )
+          }
+        </TextContainer>
+
         { showSessions ?
           (
             <Table>
