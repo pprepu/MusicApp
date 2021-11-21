@@ -6,13 +6,13 @@ import { prettyDOM } from '@testing-library/dom'  // for debugging
 import { Provider } from 'react-redux'
 import store from '../store'
 
-import AboutPage from './AboutPage'
+import Aboutpage from './Aboutpage'
 
 
 test('renders content', () => {
   const component = render(
     <Provider store={store}>
-      <AboutPage />
+      <Aboutpage />
     </Provider>
 
   )
