@@ -32,8 +32,12 @@ describe('Userpage component: ', () => {
         <Userpage />
       </Provider>
     )
-    expect(component.container).toHaveTextContent(
-      'userpage?'
+    const element = component.getByText(
+      'username:'
     )
+    expect(element).toBeDefined()
+    // expect(component.container).toHaveTextContent(
+    //   'userpage: test'
+    // )
   })
 })
