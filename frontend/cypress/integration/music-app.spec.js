@@ -9,7 +9,7 @@ describe('MusicApp ', function() {
       username: 'jTester',
       password: 'secret_password'
     }
-    cy.request('POST', 'http://localhost:3001/api/users/', user) 
+    cy.request('POST', 'http://localhost:3001/api/users/', user)
     cy.visit(homepage)
   })
   it('front page can be opened', function() {
