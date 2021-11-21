@@ -4,7 +4,7 @@ const helper = require('./test_helper')
 
 const bcrypt = require('bcrypt')
 const User = require('../models/user')
-const Session = require('../models/session')
+// const Session = require('../models/session')
 
 const app = require('../app')
 
@@ -198,7 +198,7 @@ describe('while there is a user in the database', () => {
 
       const loginResult = await loginUser()
 
-      const result = await api
+      await api
         .post('/api/sessions')
         .send(sessionToSend)
         .set('Authorization', `bearer ${loginResult.body.token}`)
