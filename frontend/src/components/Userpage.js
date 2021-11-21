@@ -71,16 +71,16 @@ const Userpage = () => {
               { user.username }
             </UserpageText>
           </TextRow>
-          { user.name && 
+          { user.name &&
             (
-            <TextRow>
-              <UserpageText bold>
+              <TextRow>
+                <UserpageText bold>
                 name:
-              </UserpageText>
-              <UserpageText>
-                { user.name }
-              </UserpageText>
-            </TextRow>
+                </UserpageText>
+                <UserpageText>
+                  { user.name }
+                </UserpageText>
+              </TextRow>
             )
           }
         </TextContainer>

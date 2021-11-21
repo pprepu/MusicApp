@@ -14,7 +14,7 @@ test('renders content', () => {
     <Provider store={store}>
       <Frontpage />
     </Provider>
-    
+
   )
 
   expect(component.container).toHaveTextContent(

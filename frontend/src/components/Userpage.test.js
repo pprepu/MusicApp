@@ -18,7 +18,7 @@ describe('Userpage component: ', () => {
 
   beforeEach(() => {
     const mockUser = {
-      username: 'test', 
+      username: 'test',
       id: '456789456'
     }
     store = mockStore({
