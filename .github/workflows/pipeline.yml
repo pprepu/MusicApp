@@ -6,31 +6,55 @@ on:
 jobs:
   simple_deployment_pipeline_backend:
     runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x]
+        mongodb-version: ['4.2', '4.4']
     defaults:
       run:
         working-directory: ./backend
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - name: git checkout
+        uses: actions/checkout@v2
+
+      - name: use node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
         with:
-          node-version: '12.x'
+          node-version: ${{ matrix.node-version }}
+
+      - name: start MongoDB
+      uses: supercharge/mongodb-github-action@1.7.0
+      with:
+        mongodb-version: ${{ matrix.mongodb-version }}
+
       - name: npm install
         run: npm install
+
       - name: lint
         run: npm run lint
+
+      - name: tests
+        run: npm run test
+
   simple_deployment_pipeline_frontend:
     runs-on: ubuntu-18.04
     defaults:
       run:
         working-directory: ./frontend
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - name: git checkout
+        uses: actions/checkout@v2
+
+      - name: use node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
         with:
-          node-version: '12.x'
+          node-version: ${{ matrix.node-version }}
+
       - name: npm install
         run: npm install
+
       - name: lint
         run: npm run lint
+
       - name: test
         run: npm run test
