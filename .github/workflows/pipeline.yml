@@ -36,6 +36,8 @@ jobs:
 
       - name: tests
         run: npm run test
+        env:
+          SECRET: secretForTESTING
 
   simple_deployment_pipeline_frontend:
     runs-on: ubuntu-18.04
