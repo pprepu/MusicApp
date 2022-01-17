@@ -6,13 +6,13 @@ on:
 jobs:
   simple_deployment_pipeline_backend:
     runs-on: ubuntu-18.04
+    defaults:
+      run:
+        working-directory: ./backend
     strategy:
       matrix:
         node-version: [14.x, 16.x]
         mongodb-version: ['4.2', '4.4']
-    defaults:
-      run:
-        working-directory: ./backend
     steps:
       - name: git checkout
         uses: actions/checkout@v2
