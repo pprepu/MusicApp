@@ -11,8 +11,8 @@ jobs:
         working-directory: ./backend
     strategy:
       matrix:
-        node-version: [14.x, 16.x]
-        mongodb-version: ['4.2', '4.4']
+        node-version: [ 16.x ]
+        mongodb-version: [ '5.0' ]
 
     steps:
       - name: git checkout
@@ -45,7 +45,6 @@ jobs:
     strategy:
       matrix:
         node-version: [14.x, 16.x]
-        mongodb-version: ['4.2', '4.4']
 
     steps:
       - name: git checkout
