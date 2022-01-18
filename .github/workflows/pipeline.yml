@@ -43,7 +43,7 @@ jobs:
       - name: codecov
         uses: codecov/codecov-action@v2
         with:
-          files: ./coverage/coverage-final.json
+          files: ./backend/coverage/coverage-final.json
           flags: backend
 
   simple_deployment_pipeline_frontend:
