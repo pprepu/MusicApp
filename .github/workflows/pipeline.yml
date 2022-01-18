@@ -37,9 +37,14 @@ jobs:
         run: npm run lint
 
       - name: tests
-        run: npm run test
+        run: npm run test -- --coverage
         env:
           SECRET: secretForTESTING
+      - name: codecov
+        uses: codecov/codecov-action@v2
+        with:
+          files: ./coverage/lcov-report/index.html
+          flags: backend
 
   simple_deployment_pipeline_frontend:
     runs-on: ubuntu-18.04
