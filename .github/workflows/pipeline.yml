@@ -40,6 +40,7 @@ jobs:
         run: npm run test -- --coverage
         env:
           SECRET: secretForTESTING
+
       - name: codecov
         uses: codecov/codecov-action@v2
         with:
@@ -54,6 +55,7 @@ jobs:
     strategy:
       matrix:
         node-version: [14.x, 16.x]
+        mongodb-version: [ '5.0' ]
 
     steps:
       - name: git checkout
@@ -72,8 +74,21 @@ jobs:
 
       - name: tests
         run: npm run test -- --coverage
+
       - name: codecov
         uses: codecov/codecov-action@v2
         with:
           files: ./frontend/coverage/coverage-final.json
           flags: frontend
+
+      - name: start MongoDB
+        uses: supercharge/mongodb-github-action@1.7.0
+        with:
+          mongodb-version: ${{ matrix.mongodb-version }}
+
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+          command: npm run test:e2e
+          start: npm run start-backend
+          wait-on: http://localhost:3001
