@@ -25,6 +25,7 @@
     "lint": "eslint .",
     "cypress:open": "cypress open",
     "test:e2e": "cypress run",
+    "install-backend-CI": "cd ../backend/ && npm install && cd ../frontend/",
     "start-backend": "cd ../backend/ && npm run start:test"
   },
   "proxy": "http://localhost:3001",
