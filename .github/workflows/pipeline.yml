@@ -88,11 +88,10 @@ jobs:
 
       - name: install backend
         run: npm run install-backend-CI
-        
+
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
           command: npm run test:e2e
           start: npm run start-backend
-          wait-on: http://localhost:3001
           working-directory: ./frontend
