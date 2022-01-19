@@ -93,3 +93,4 @@ jobs:
           command: npm run test:e2e
           start: npm run start-backend
           wait-on: http://localhost:3001
+          working-directory: ./frontend
