@@ -70,5 +70,10 @@ jobs:
       - name: lint
         run: npm run lint
 
-      - name: test
-        run: npm run test
+      - name: tests
+        run: npm run test -- --coverage
+      - name: codecov
+        uses: codecov/codecov-action@v2
+        with:
+          files: ./frontend/coverage/coverage-final.json
+          flags: frontend
