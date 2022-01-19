@@ -85,7 +85,8 @@ jobs:
         with:
           files: ./frontend/coverage/coverage-final.json
           flags: frontend
-
+      - name: cross-env
+        run: npm install cross-env
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
