@@ -89,7 +89,7 @@ jobs:
       - name: install backend
         run: npm run install-backend-CI
 
-      - name: start backend and wait
+      - name: start backend
         run: npm run start-backend &
 
       - name: e2e tests
@@ -97,5 +97,5 @@ jobs:
         with:
           command: npm run test:e2e
           start: npm start
-          wait-on: 'http://localhost:3001'
+          wait-on: 'http://localhost:3000'
           working-directory: ./frontend
