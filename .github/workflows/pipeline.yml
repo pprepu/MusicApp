@@ -93,7 +93,12 @@ jobs:
         run: npm start &
 
       - name: start backend and wait
-        run: npm run start-backend && sleep 10
+        run: npm run start-backend &
+
+      - name: Sleep for 30 seconds
+        uses: whatnick/wait-action@master
+        with:
+          time: '10s'
 
       - name: e2e tests
         uses: cypress-io/github-action@v2
