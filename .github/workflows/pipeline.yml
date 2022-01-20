@@ -89,9 +89,12 @@ jobs:
       - name: install backend
         run: npm run install-backend-CI
 
+      - name: start frontend
+        run: npm start &
+
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
           command: npm run test:e2e
-          start: npm run start-backend && npm start
+          start: npm run start-backend
           working-directory: ./frontend
