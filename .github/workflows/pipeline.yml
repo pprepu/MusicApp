@@ -89,19 +89,13 @@ jobs:
       - name: install backend
         run: npm run install-backend-CI
 
-      - name: start frontend
-        run: npm start &
-
       - name: start backend and wait
         run: npm run start-backend &
-
-      - name: Sleep for 30 seconds
-        uses: whatnick/wait-action@master
-        with:
-          time: '10s'
 
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
           command: npm run test:e2e
+          start: npm start
+          wait-on: 'http://localhost:3001'
           working-directory: ./frontend
