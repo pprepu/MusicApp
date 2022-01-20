@@ -92,9 +92,11 @@ jobs:
       - name: start frontend
         run: npm start &
 
+      - name: start backend and wait
+        run: npm run start-backend && sleep 10
+
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
           command: npm run test:e2e
-          start: npm run start-backend
           working-directory: ./frontend
