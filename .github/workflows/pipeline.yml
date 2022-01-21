@@ -97,4 +97,5 @@ jobs:
           wait-on: http://localhost:3000
           working-directory: ./frontend
           env:
-          PORT: 3001
+            PORT: 3001
+            SECRET: secretForTESTING
