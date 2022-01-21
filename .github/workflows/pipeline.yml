@@ -95,11 +95,6 @@ jobs:
           PORT: 3001
           SECRET: secretForTESTING
 
-      - name: wait 
-        uses: jakejarvis/wait-action@master
-        with:
-          time: '10s'
-
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
