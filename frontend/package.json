@@ -26,7 +26,8 @@
     "cypress:open": "cypress open",
     "test:e2e": "cypress run",
     "install-backend-CI": "cd ../backend/ && npm install && cd ../frontend/",
-    "start-backend": "cd ../backend/ && npm run start:test"
+    "start-backend": "cd ../backend/ && npm run start:test",
+    "start-prod-test": "concurrently \"npm start\" \"npm run start-backend\""
   },
   "proxy": "http://localhost:3001",
   "browserslist": {
@@ -42,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "concurrently": "^7.0.0",
     "cypress": "^8.4.1",
     "deep-freeze": "0.0.1",
     "eslint-plugin-jest": "^25.2.4",
