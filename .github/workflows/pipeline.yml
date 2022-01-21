@@ -96,3 +96,5 @@ jobs:
           start: npm run start-prod-test
           wait-on: http://localhost:3000
           working-directory: ./frontend
+          env:
+          PORT: 3001
