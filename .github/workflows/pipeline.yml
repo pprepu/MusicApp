@@ -92,6 +92,11 @@ jobs:
       - name: start backend
         run: npm run start-backend &
 
+      - name: wait 
+        uses: jakejarvis/wait-action@master
+        with:
+          time: '20s'
+
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
