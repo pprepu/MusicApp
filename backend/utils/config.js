@@ -10,7 +10,7 @@ if (process.env.NODE_ENV === 'test') {
   MONGODB_URI = process.env.DEV_MONGODB_URI
 }
 
-let PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 3001
 
 module.exports = {
   MONGODB_URI, PORT
