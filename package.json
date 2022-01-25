@@ -4,7 +4,8 @@
   "description": "Description coming *soon*...",
   "main": "index.js",
   "scripts": {
-    "start": "node backend/index.js"
+    "heroku-prebuild": "cd backend && npm install",
+    "start": "cd backend && npm start"
   },
   "repository": {
     "type": "git",
