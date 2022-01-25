@@ -1,0 +1,1 @@
+{"version":3,"sources":["ScaleList.css"],"names":[],"mappings":"AAEA,eACE,qBACF,CAEA,gBACC,qBACD","file":"main.6224a0ec.chunk.css","sourcesContent":["\r\n\r\n.scaleButtonOn {\r\n  background-color: grey\r\n}\r\n\r\n.scaleButtonOff {\r\n background-color: white;\r\n}\r\n"]}
