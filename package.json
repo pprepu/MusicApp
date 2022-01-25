@@ -1,0 +1,19 @@
+{
+  "name": "musaprojekti",
+  "version": "1.0.0",
+  "description": "Description coming *soon*...",
+  "main": "index.js",
+  "scripts": {
+    "start": "node backend/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pprepu/MusicApp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pprepu/MusicApp/issues"
+  },
+  "homepage": "https://github.com/pprepu/MusicApp#readme"
+}
