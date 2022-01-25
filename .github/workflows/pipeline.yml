@@ -104,11 +104,11 @@ jobs:
           working-directory: ./frontend
   deploy_to_heroku:
     runs-on: ubuntu-18.04
-      steps:
-        - uses: actions/checkout@v2
-        - uses: akhileshns/heroku-deploy@v3.12.12
-          with:
-            heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-            heroku_app_name: "musicapp_react"
-            heroku_email: "pekka.prepula@gmail.com"
-            healthcheck: 'https://musicapp-react.herokuapp.com/api/health'
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "musicapp_react"
+          heroku_email: "pekka.prepula@gmail.com"
+          healthcheck: 'https://musicapp-react.herokuapp.com/api/health'
