@@ -109,6 +109,6 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "musicapp_react"
+          heroku_app_name: "musicapp-react"
           heroku_email: "pekka.prepula@gmail.com"
           healthcheck: 'https://musicapp-react.herokuapp.com/api/health'
