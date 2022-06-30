@@ -20,7 +20,7 @@ const AboutPage = () => {
         actual code looks like.
       </TextParagraph>
       <TextParagraph>
-        The purpose of the app is to teach how to recognize musical intervals, which refer to the distance between the frequencies of 
+        The purpose of the app is to teach how to recognize musical intervals, which refer to the distance between the frequencies of
         musical notes. It would be a daunting task to sufficiently present my view and understanding about the importance of intervals in music,
         but in general, they are the fundamental building pieces of musical harmony which, in part, is typically an essential
         component of music itself.
@@ -39,7 +39,7 @@ const AboutPage = () => {
       </TextParagraph>
       <TextParagraph>
         The frontend was built with the React-library using hooks to control some simple component states and React-Redux to control the general state of the whole application. Hooks are also used with React-Redux to distribute the saved state in the Redux-store to different components.
-        Communication with the backend is established with the Axios library. Styles were implemented using the Styled-components library built for creating component level styling and using responsive design principles. 
+        Communication with the backend is established with the Axios library. Styles were implemented using the Styled-components library built for creating component level styling and using responsive design principles.
       </TextParagraph>
       <TextParagraph>
         In the code, stylistic uniformity in both backend and frontend is achieved by using a static analysis tool ESLint.
@@ -51,11 +51,11 @@ const AboutPage = () => {
         Integration tests for the backend were created using both Jest and Supertest.
       </TextParagraph>
       <TextParagraph>
-        Unit and integration testing for the frontend was implemented with the Jest-library, but it was enhanced with both the React Testing Library and Jest-dom to be able to test the rendered React-components as well.  
+        Unit and integration testing for the frontend was implemented with the Jest-library, but it was enhanced with both the React Testing Library and Jest-dom to be able to test the rendered React-components as well.
         Also, Deep-freeze library was used to check the immutability of reducers used with Redux and Redux-mock-store was helpful in controlling the state of the Redux-store during testing.
       </TextParagraph>
       <TextParagraph>
-        Finally, end-to-end tests were created with Cypress. 
+        Finally, end-to-end tests were created with Cypress.
       </TextParagraph>
       <SubHeading>
         Continuous integration
