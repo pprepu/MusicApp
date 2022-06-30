@@ -166,21 +166,6 @@ const getCorrectChromaticScaleForChromatic = scale => {
   return createNotesWithOctaves(chromaticFlat, 2)
 }
 
-
-// majorScales.e.forEach(note => console.log(`note: ${note}, isC = ${note[0] === 'c'}`))
-
-// console.log(createNotesWithOctaves(majorScales.fSharp, 1))
-// console.log(createNotesWithOctaves(majorScales.cSharp, 1))
-// console.log(createNotesWithOctaves(majorScales.c))
-// console.log(createNotesWithOctaves(chromaticSharp, 2))
-
-//console.log(getRandomNoteFromScale('d-maj'))
-
-// for (const scale in majorScales) {
-//     console.log(`${scale}: ${getCorrectChromaticScaleForMajor(scale + '-maj')}`)
-// }
-
-
 export default {
   getRandomNoteFromScale,
   getCorrectChromaticScaleForMajor,

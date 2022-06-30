@@ -88,8 +88,6 @@ const changePitchOneOctaveHigher = pitch => {
 const changeToEnharmonicNote = note => {
   const [freq, pitch] = note.split('_')
   switch (freq) {
-  // case 'cb':
-  //     return `b_${pitch}`
   case 'fb':
     return `e_${pitch}`
   case 'e#':
@@ -123,22 +121,17 @@ const distanceForTwoNotes = (note1, note2, notes) => {
 const generateAllIntervals = (correctInterval, allIntervalsReceived, generatedIntervals = 6) => {
   correctInterval = correctInterval.toLowerCase()
   const distanceOfCorrectInterval = intervalToDistance(correctInterval)
-  // console.log('allIntervalsReceived:', allIntervalsReceived)
 
   if (distanceOfCorrectInterval === '') {
-    // console.log(correctInterval)
     throw new Error('generatedOtherInterval called with an incorrect correctInterval parameter')
   }
 
   if (generatedIntervals >= HIGHEST_INTERVAL_DISTANCE - 1 || generatedIntervals < 1) {
     throw new Error('generatedOtherInterval called with an incorrect generatedIntervals parameter')
   }
-  // tee allIntervalsista defaultti, jossa kaikki, sit voit poistaa allaolevan taulukon luomisen
-  // lisää maholliseksi parametriksi "kaikki maholliset intervallit" sisältävä taulukko, joka korvaa mahd. defaultin
 
   let allIntervalsReceivedCopy = allIntervalsReceived.filter(interval => interval !== correctInterval)
   generalService.shuffleArrayInPlace(allIntervalsReceivedCopy)
-  // console.log('allIntervalsReceived after filtering:', allIntervalsReceivedCopy)
 
   let returnedIntervals = allIntervalsReceivedCopy.length >= generatedIntervals - 1   // subtract 1, because correct interval will be pushed in
     ? allIntervalsReceivedCopy.slice(0 , generatedIntervals - 1)
@@ -147,37 +140,10 @@ const generateAllIntervals = (correctInterval, allIntervalsReceived, generatedIn
   returnedIntervals.push(correctInterval)
   generalService.shuffleArrayInPlace(returnedIntervals)
   return returnedIntervals
-  // const allIntervals = []
-
-  // for (let i = 0; i <= HIGHEST_INTERVAL_DISTANCE; i++) {
-  //     if (i !== distanceOfCorrectInterval) {
-  //         allIntervals.push(distanceToInterval(i))
-  //     }
-  // }
-
-  // // alla olevaa voisi ehkä optimoida
-  // shuffleArray(allIntervals)
-  // let returnedIntervals = allIntervals.slice(0 , generatedIntervals - 1)
-
-  // returnedIntervals.push(correctInterval)
-
-  // shuffleArray(returnedIntervals)
-
-  // return returnedIntervals
 }
 
 const findIntervalForMajor = (note1, note2, scale) =>
   distanceToInterval(distanceForTwoNotes(note1, note2, noteService.getCorrectChromaticScale(scale)))
-
-
-//debugging
-// const chromaticSharp = ['c', 'c#', 'd', 'd#', 'e', 'f', 'f#',
-//     'g', 'g#', 'a', 'a#', 'b']
-
-// console.log(findIntervalForMajor('a', 'f#', chromaticSharp))
-
-// console.log('testi')
-// console.log(generateAllIntervals('Perfect octave'))
 
 export default {
   findIntervalForMajor,

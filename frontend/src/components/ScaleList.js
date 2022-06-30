@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addScale, removeScale, addMultipleScales, resetScales } from '../reducers/scaleReducer'
 import { addInterval, removeInterval, addMultipleIntervals, resetIntervals } from '../reducers/intervalReducer'
 
-import './ScaleList.css'
 import { SubPage, Text, Button, StyledButton } from '../globalStyles'
 import { ScaleButton, ScaleContainer, OptionList, OptionItem } from './ScaleList.elements'
 

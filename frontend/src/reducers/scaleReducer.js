@@ -3,7 +3,6 @@ export const initialState = []
 
 const scaleReducer = (state = initialState, action) => {
   switch (action.type) {
-  // should this be RESET_SCALES ?
   case 'RESET_SCALES':
     return initialState
   case 'ADD_SCALE':

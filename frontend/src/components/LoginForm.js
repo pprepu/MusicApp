@@ -7,8 +7,6 @@ import sessionService from '../services/sessions'
 
 import { FormRow, FormInput, FormLabel, StyledButton, SubPage } from '../globalStyles'
 import { FormLogin, ErrorMessage } from './LoginForm.elements'
-// import { ErrorText } from './Signup.elements'
-// import './LoginForm.css'
 
 const LoginForm = () => {
   const [username, setUsername] = useState('')

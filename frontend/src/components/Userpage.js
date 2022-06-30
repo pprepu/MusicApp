@@ -10,29 +10,6 @@ import { SubPage, Container, Text } from '../globalStyles'
 import { Table, TableBody, TableRow, TableText } from './SessionSummary.elements'
 import { TextContainer, TextRow, UserpageText } from './Userpage.elements'
 
-// import './Userpage.css'
-// import { SummaryItem } from './SessionSummary'
-
-// const Session = ({ session, index }) => {
-//     const [visible, setVisible] = useState(false)
-//     return (
-//         <div>
-//             <h3>Session {index+1}:</h3>
-//             <p>Correct: {session.answersCorrect}, Wrong: {session.answersWrong}</p>
-//             <button onClick={() => setVisible(!visible)}>{visible ? 'hide' : 'show' }</button>
-//             <div className='history-container'>
-//                 {visible && session.sessionHistory.map((question, index) =>
-//                     <SummaryItem
-//                         key={index}
-//                         correct={question.answer === question.correctAnswer}
-//                         answer={question.answer}
-//                         correctAnswer={question.correctAnswer}
-//                     />
-//                 )}
-//             </div>
-//         </div>
-//     )
-// }
 
 const Userpage = () => {
 
