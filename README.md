@@ -1,8 +1,8 @@
 # MusicApp
 
-## What is this app?
-
 The app can be found at: [MusicApp @heroku](https://musicapp-react.herokuapp.com/)
+
+## What is this app?
 
 The purpose of the app is to teach how to recognize musical intervals, which refer to the distance between the frequencies of musical notes. It would be a daunting task to sufficiently present my view and understanding about the importance of intervals in music, but in general, they are the fundamental building pieces of musical harmony which, in part, is typically an essential component of music itself.
 
