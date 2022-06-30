@@ -18,6 +18,6 @@ test('renders content', () => {
   )
 
   expect(component.container).toHaveTextContent(
-    'More text.'
+    'What is this app?'
   )
 })
