@@ -29,7 +29,8 @@ const IntervalContainer = () => {
   const intervalsInApp = useSelector(state => state.intervals)
   const dispatch = useDispatch()
 
-  const INTERVALS_PER_SESSION = 2
+  // tällä hetkellä fixed, käyttäjän päätettäväksi ASAP
+  const INTERVALS_PER_SESSION = 6
 
   const askForInterval = () => {
 

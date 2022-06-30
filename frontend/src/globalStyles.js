@@ -139,7 +139,7 @@ export const FormLabel = styled.label`
 export const TextParagraph = styled.p`
     /* align-self: left; */
     text-align: left;
-    margin: 25px;
+    margin: 15px;
 
     @media screen and (max-width: 960px) {
         width: 70%;
@@ -152,6 +152,38 @@ export const Text = styled.p`
     @media screen and (max-width: 960px) {
         width: 70%;
         margin: 10px 15px 10px 10px;
+    }
+`
+
+export const MainHeading = styled.h1`
+    font-size: 1.5em;
+    padding: 25px;
+`
+export const Heading = styled.h2`
+    font-size: 1.5m;
+    padding: 25px;
+`
+
+export const SubHeading = styled.h3`
+    font-size: 1.2em;
+    padding: 25px;
+`
+
+export const Link = styled.a`
+    color: black;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+        transition: all 0.3s ease-out;
+        border-radius: 7px;
+        background-color: #F0F0F0;
+    }
+
+    &:active, &:visited {
+        text-decoration: none;
     }
 `
 

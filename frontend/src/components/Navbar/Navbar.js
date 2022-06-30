@@ -71,7 +71,7 @@ const Navbar = () => {
         <Nav>
           <NavbarContainer>
             <NavLogo onClick={() => dispatch(resetSession())}>
-              <NavIcon />
+              <NavIcon /> MusicApp
             </NavLogo>
             <MobileIcon onClick={handleClick}>
               {click ? <FaTimes /> : <FaBars />}
