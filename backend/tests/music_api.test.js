@@ -4,7 +4,6 @@ const helper = require('./test_helper')
 
 const bcrypt = require('bcrypt')
 const User = require('../models/user')
-// const Session = require('../models/session')
 
 const app = require('../app')
 

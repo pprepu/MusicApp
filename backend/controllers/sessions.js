@@ -47,23 +47,6 @@ sessionRouter.post('/', async (req, res, next) => {
   } catch (exception) {
     next(exception)
   }
-  // let user = null
-  // if (body.userId) {
-  //   try {
-  //     const token = getTokenFromReq(req)
-  //     const decodedToken = jwt.verify(token, process.env.SECRET)
-  //     if (!token || !decodedToken.id) {
-  //       return res.status(401).json({ error: 'token missing or invalid' })
-  //     }
-  //     user = await User.findById(body.userId)
-  //     session.user = user._id
-  //   } catch(exception) {
-  //     next(exception)
-  //     return
-  //   }
-
-  // }
-
 })
 
 //lisää try-catch -->
