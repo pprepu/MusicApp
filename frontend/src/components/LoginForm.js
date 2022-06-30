@@ -70,31 +70,6 @@ const LoginForm = () => {
       </FormLogin>
     </SubPage>
   )
-  // return (
-  //     <div className='login-container'>
-  //       <form onSubmit={handleLogin}>
-  //           <div className='login-item'>
-  //               username
-  //               <input
-  //                   type='text'
-  //                   value={ username }
-  //                   name='Username'
-  //                   onChange={({ target }) => setUsername(target.value)}
-  //               />
-  //           </div>
-  //           <div className='login-item'>
-  //               password
-  //               <input
-  //                   type='password'
-  //                   value={ password }
-  //                   name='Password'
-  //                   onChange={({ target }) => setPassword(target.value)}
-  //               />
-  //           </div>
-  //           <button type="submit">login</button>
-  //       </form>
-  //     </div>
-  // )
 }
 
 export default LoginForm

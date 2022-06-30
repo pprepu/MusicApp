@@ -131,27 +131,6 @@ const Navbar = () => {
       </IconContext.Provider>
     </>
   )
-
-  // return (
-  //     <>
-  //     <IconContext.Provider value={{ color: '#fff'}}>
-  //         <Nav>
-  //             <NavbarContainer>
-  //                 <NavLogo>
-  //                     <NavIcon />
-  //                 </NavLogo>
-  //                 <MobileIcon onClick={handleClick}>
-  //                     {click ? <FaTimes /> : <FaBars />}
-  //                 </MobileIcon>
-  //                 <NavbarContainer justifyContent='flex-end'>
-  //                     <NavbarItem>{user ? <p onClick={() => dispatch(visitUserpage() )}>{user.username}</p> : <p>Signup</p>}</NavbarItem>
-  //                     <NavbarItem>{user ? <p onClick={() => handleLogout() }>Logout</p> : <LoginForm />}</NavbarItem>
-  //                 </NavbarContainer>
-  //             </NavbarContainer>
-  //         </Nav>
-  //     </IconContext.Provider>
-  //     </>
-  // )
 }
 
 export default Navbar

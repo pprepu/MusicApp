@@ -17,7 +17,7 @@ export const SummaryItem = ({ correct, answer, correctAnswer }) => {
     width: '100px',
     bottom: '100%',
     left: '50%',
-    marginLeft: '-50px', /* Use half of the width, to center the tooltip */
+    marginLeft: '-50px', /* half of the width, to center... */
   }
 
   const HoverTextHidden = {
