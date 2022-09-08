@@ -4,20 +4,20 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import { prettyDOM } from '@testing-library/dom'  // for debugging
 
 import { Provider } from 'react-redux'
-import store from '../store'
+import store from '../../store'
 
-import SessionSummary from './SessionSummary'
+import Signup from './Signup'
 
 
 test('renders content', () => {
   const component = render(
     <Provider store={store}>
-      <SessionSummary />
+      <Signup />
     </Provider>
 
   )
 
   expect(component.container).toHaveTextContent(
-    'Exercise information'
+    'username:'
   )
 })

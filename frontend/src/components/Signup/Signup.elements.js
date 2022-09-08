@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { StyledButton } from '../globalStyles'
+import { StyledButton } from '../../globalStyles'
 
 export const SignupButton = styled(StyledButton)`
     opacity: ${({ disabled }) => disabled ? '0.2' : '1'};

@@ -6,7 +6,7 @@ import {
   Heading,
   SubHeading,
   Link,
-} from '../globalStyles'
+} from '../../globalStyles'
 
 const AboutPage = () => {
   return (

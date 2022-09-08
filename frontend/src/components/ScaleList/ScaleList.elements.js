@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Button, Container, StyledButton } from '../globalStyles'
+import { Button, Container, StyledButton } from '../../globalStyles'
 
 export const ScaleButton = styled(Button)`
     background-color: ${({ isToggled }) => isToggled ? 'grey' : 'white'};

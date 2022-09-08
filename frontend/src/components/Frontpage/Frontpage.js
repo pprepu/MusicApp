@@ -1,8 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { startSettings } from '../reducers/sessionReducer.js'
 
-import { SubPage, TextParagraph, MainHeading } from '../globalStyles.js'
+import { SubPage, TextParagraph, MainHeading } from '../../globalStyles.js'
 const Frontpage = () => {
 
   const dispatch = useDispatch()

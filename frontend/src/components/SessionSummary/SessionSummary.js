@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch, ReactReduxContext } from 'react-redux'
-import { resetSession } from '../reducers/sessionReducer.js'
-import { resetScales } from '../reducers/scaleReducer.js'
-import { resetIntervals } from '../reducers/intervalReducer.js'
+import { resetSession } from '../../reducers/sessionReducer.js'
+import { resetScales } from '../../reducers/scaleReducer.js'
+import { resetIntervals } from '../../reducers/intervalReducer.js'
 
-import { SubPage, Button } from '../globalStyles'
+import { SubPage, Button } from '../../globalStyles'
 import { Table, TableBody, TableRow, TableText } from './SessionSummary.elements'
 
 const SessionSummary = () => {
@@ -19,7 +19,7 @@ const SessionSummary = () => {
     dispatch(resetIntervals())
   }
 
-  // sama funktio kuin scalelistissä, vie johonki helperiin ja importaa näissä?
+  // sama funktio kuin scalelistissä, vie johonkin helperiin ja importaa näissä?
   const formatScale = scale => {
     let [bassNote,] = scale.split('-')
     bassNote = bassNote.replace('Sharp', '#')

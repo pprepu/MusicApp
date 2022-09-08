@@ -8,7 +8,7 @@ import configureStore from 'redux-mock-store'
 
 import Userpage from './Userpage'
 import { useDispatch } from 'react-redux'
-import userService from '../services/users'
+import userService from '../../services/users'
 
 const mockStore = configureStore([])
 

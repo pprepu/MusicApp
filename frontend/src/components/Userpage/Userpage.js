@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { resetSession } from '../reducers/sessionReducer'
-import { resetScales } from '../reducers/scaleReducer.js'
-import { resetIntervals } from '../reducers/intervalReducer.js'
-import userService from '../services/users'
-import generalService from '../services/general'
-import { SubPage, Container, Text } from '../globalStyles'
+import { resetSession } from '../../reducers/sessionReducer'
+import { resetScales } from '../../reducers/scaleReducer.js'
+import { resetIntervals } from '../../reducers/intervalReducer.js'
+import userService from '../../services/users'
+import generalService from '../../services/general'
+import { SubPage, Container, Text } from '../../globalStyles'
 
-import { Table, TableBody, TableRow, TableText } from './SessionSummary.elements'
+import { Table, TableBody, TableRow, TableText } from '../SessionSummary/SessionSummary.elements.js'
 import { TextContainer, TextRow, UserpageText } from './Userpage.elements'
 
 

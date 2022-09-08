@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch, ReactReduxContext } from 'react-redux'
 
-import noteService from '../services/notes'
-import intervalService from '../services/intervals'
-import sessionService from '../services/sessions'
+import noteService from '../../services/notes'
+import intervalService from '../../services/intervals'
+import sessionService from '../../services/sessions'
 
-import { answerCorrect, answerWrong, endSession } from '../reducers/sessionReducer.js'
+import { answerCorrect, answerWrong, endSession } from '../../reducers/sessionReducer.js'
 
-import { SubPage, Text, StyledButton } from '../globalStyles'
+import { SubPage, Text, StyledButton } from '../../globalStyles'
 import { SessionContainer, ImageContainer, AnswerContainer, ImageItem, AnswerButton } from './IntervalContainer.elements'
 
-import images from '../services/images'
+import images from '../../services/images'
 
 const IntervalContainer = () => {
   const [note1, setNote1] = useState('c_1')

@@ -4,20 +4,20 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import { prettyDOM } from '@testing-library/dom'  // for debugging
 
 import { Provider } from 'react-redux'
-import store from '../store'
+import store from '../../store'
 
-import Frontpage from './Frontpage'
+import ScaleList from './ScaleList'
 
 
 test('renders content', () => {
   const component = render(
     <Provider store={store}>
-      <Frontpage />
+      <ScaleList />
     </Provider>
 
   )
 
   expect(component.container).toHaveTextContent(
-    'Enjoy your visit!'
+    'Choose the scales you want to get the notes from:'
   )
 })

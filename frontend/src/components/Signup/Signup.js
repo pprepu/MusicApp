@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import userService from '../services/users'
-import sessionService from '../services/sessions'
-import { visitLoginpage } from '../reducers/sessionReducer'
+import userService from '../../services/users'
+import sessionService from '../../services/sessions'
+import { visitLoginpage } from '../../reducers/sessionReducer'
 
-import { FormRow, FormInput, FormLabel, SubPage } from '../globalStyles'
+import { FormRow, FormInput, FormLabel, SubPage } from '../../globalStyles'
 import { SignupButton, ErrorText, TextDescription } from './Signup.elements'
-import { FormLogin } from './LoginForm.elements'
+import { FormLogin } from '../LoginForm/LoginForm.elements'
 
 const Signup = () => {
   const dispatch = useDispatch()

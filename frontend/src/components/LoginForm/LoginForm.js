@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { loginUser } from '../reducers/userReducer'
-import { resetSession } from '../reducers/sessionReducer'
-import loginService from '../services/login'
-import sessionService from '../services/sessions'
+import { loginUser } from '../../reducers/userReducer'
+import { resetSession } from '../../reducers/sessionReducer'
+import loginService from '../../services/login'
+import sessionService from '../../services/sessions'
 
-import { FormRow, FormInput, FormLabel, StyledButton, SubPage } from '../globalStyles'
+import { FormRow, FormInput, FormLabel, StyledButton, SubPage } from '../../globalStyles'
 import { FormLogin, ErrorMessage } from './LoginForm.elements'
 
 const LoginForm = () => {
