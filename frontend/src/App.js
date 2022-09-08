@@ -56,10 +56,6 @@ const App = () => {
       { currentSession.currentPage === 'userPage' && <Userpage /> }
       { currentSession.currentPage === 'signup' && <Signup /> }
       { currentSession.currentPage === 'about' && <Aboutpage /> }
-
-      {/* <div>
-        <StyledButton fontBig big onClick={() => console.log(currentSession, '---', currentIntervals, '---', user)}>debug</StyledButton>
-      </div> */}
     </Page>
   )
 }
