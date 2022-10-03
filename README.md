@@ -30,7 +30,7 @@ Effort has been put into creating a system for getting the software efficiently 
 
 First of all, deployment has been made easier by creating straightforward npm-scripts to help with its different stages.
 
-However, more important is the implementation of Github Actions in the code repository. These actions are currently used to automate linting, testing in both backend and frontend (including end-to-end testing), code coverage analysis (by codecov) and deployment to heroku, where the app itself is currently hosted. Furthermore, badges about the current workflow status and code coverage can be found below.
+However, more important is the implementation of Github Actions in the code repository. These actions are currently used to automate linting, testing in both backend and frontend (including end-to-end testing), code coverage analysis (by codecov) and deployment to heroku, where the app itself is currently hosted. Furthermore, badges about the current workflow status and test coverage can be found below.
 
 ![GitHub Actions](https://github.com/pprepu/MusicApp/actions/workflows/pipeline.yml/badge.svg)
 [![codecov](https://codecov.io/gh/pprepu/MusicApp/branch/master/graph/badge.svg)](https://codecov.io/gh/pprepu/MusicApp)
